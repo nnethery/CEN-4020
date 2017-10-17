@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e376ec11bdb99f6092e4cca10899578bafb59705">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_7e40ac21dfe539a9224d9a7f8624296c31dfc03e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_3b13152d7297674e6829c88565d99e74f056e230/classes.dex" />
+    </item>
+
+</items>
