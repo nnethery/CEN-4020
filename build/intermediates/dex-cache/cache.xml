@@ -3,6 +3,15 @@
 
     <item
         is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/1e905a87ff861e2463384d7c5b4348d23fcbf2e9/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="6f65c144283b31b4b9a70e6e7aa4c4a1c897d4b8">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_585812aff28cb45069f25e110d19274f9db1f047/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/Noah/.gradle/caches/modules-2/files-2.1/com.pubnub/pubnub-gson/4.12.0/413b6b4519334de090c12763f6691c9513639a79/pubnub-gson-4.12.0.jar"
         jumboMode="true"
         optimize="true"
@@ -12,12 +21,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/Noah/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.8.1/4d060ca3190df0eda4dc13415532a12e15ca5f11/okhttp-3.8.1.jar"
+        jar="/Users/Noah/.android/build-cache/94d9c68b5dafa7a7902156bf7f6c56c38fd02015/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="4d060ca3190df0eda4dc13415532a12e15ca5f11">
-        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.8.1_834bdf251c16f154a36bb5a610bf1888647af91a/classes.dex" />
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6fb4a9be7caffae9f7c7401c50abd3ae06f13810/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -30,12 +39,111 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/4149a60dc92e458b060019ca18f430aabf3f4932/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4e9b2212fee44d7dbd7774e67a7d72d9a3c7c068/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d206ce50ebee696695324fede5a801e6f58f7ada">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_7e40ac21dfe539a9224d9a7f8624296c31dfc03e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.13.0_5da2104cf9b0fa685c09af2899bfe5420ea1841f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/cbdf7f645acdebc0d60912e6d15283001eb8d451/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1941832901fc4e7a93300b53762e9f65d7650b99">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b6ebeca6aa4caf1de9023659c83147191653e6d6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/20166501f4345b83df503854d70d9f6abd74800a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="cc178928721f3222b3b06bdfbd9497378ccb9792">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2ff8d1f5b86d73535f18fc0841aaa5efbef0213c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.8.1/4d060ca3190df0eda4dc13415532a12e15ca5f11/okhttp-3.8.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="4d060ca3190df0eda4dc13415532a12e15ca5f11">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.8.1_834bdf251c16f154a36bb5a610bf1888647af91a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/6ddb202a36533fc0a7d3e726da32a81fd42f0fe0/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="0dc8ab07eeceda5e99b305c8069765056b6e5c9d">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c9af83b2dbd2da6b8833008f88e6f3117f174fe1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/c0c1886820b047f70c9f26252b9e7a3d4bcac722/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0e2256d69f1d2bf10799082319170edc2b7ecaf9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/580bc0d4e87ff2780ffa49774ee788ad65370a01/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="ea4b54dcbfe5ac05efb0a314105f07258118d3a7">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d6fc6243b05d005b1b91e4ccd72e2864e3ba8e9f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/Noah/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.3.0/bcacde6a8ccedcc56c127403d26b76072fe6214d/retrofit-2.3.0.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
         sha1="bcacde6a8ccedcc56c127403d26b76072fe6214d">
         <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/retrofit-2.3.0_22c73235046ce459415a3a8e818f18c73b9faf41/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/48734a5feef7c7ccc97d1527fa797b0478e266a2/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="4ef8ab5fee042023018249474bc93bd4b2b9c17e">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_fcd7c50daa7a5eec4fea9a696b063df02262f664/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/caab6e2750408b91c7569639bcc1e241309879fd/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="42df48c7305b08b14fa0e84561091b0c24d70d26">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0fcf9f713b13dcc75c0bb3274fe1d08ae1a5f168/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -48,30 +156,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="b82daccc7a89ffbc26108f2fced6b10c668b4e19">
-        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_7e40ac21dfe539a9224d9a7f8624296c31dfc03e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
         <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_3b13152d7297674e6829c88565d99e74f056e230/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Noah/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.13.0_5da2104cf9b0fa685c09af2899bfe5420ea1841f/classes.dex" />
     </item>
     <item
         is-multidex="true"
