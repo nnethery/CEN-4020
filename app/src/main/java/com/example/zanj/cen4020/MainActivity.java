@@ -63,8 +63,6 @@ public class MainActivity extends Activity {
 
         chatFrag.setAdapter(mPubSub);
 
-
-
         channelName = getIntent().getStringExtra("channel");
         username = getIntent().getStringExtra("username");
         PUBSUB_CHANNEL = Arrays.asList(channelName);
