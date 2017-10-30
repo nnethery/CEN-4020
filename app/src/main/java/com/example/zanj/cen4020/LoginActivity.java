@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     // UI references.
     private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
+    private EditText mPasswordView, mChannelName;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
+        mChannelName = (EditText) findViewById(R.id.channelName);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -105,7 +106,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 //attemptLogin();
-                login(mEmailView.getText().toString(), mPasswordView.getText().toString());
+                login(mEmailView.getText().toString(), mPasswordView.getText().toString(), mChannelName.getText().toString());
             }
         });
 
@@ -113,7 +114,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
     }
 
-    private void login(String email, String password) {
+    private void login(String email, String password, final String channelName) {
+        final String username = email.split("@")[0];
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -122,8 +124,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Auth", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(LoginActivity.this, "Success:" + user.getUid(),
-                                    Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("username", username);
+                            intent.putExtra("channel", channelName);
+                            startActivity(intent);
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -187,13 +191,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+      /*  FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
             Intent intent = new Intent(this, UserActivity.class);
             startActivity(intent);
         }
-        // segue to UserActivity
+        // segue to UserActivity*/
     }
 
 
@@ -409,6 +413,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+
+
+    }
+
+    public void registerClicked(View v)
+    {
+        Intent intent = new Intent(this, UserActivity.class);
+        startActivity(intent);
     }
 }
 
