@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.callbacks.SubscribeCallback;
 import com.pubnub.api.models.consumer.PNStatus;
+import com.pubnub.api.models.consumer.history.PNHistoryItemResult;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -39,6 +40,21 @@ public class PubSubPnCallback extends SubscribeCallback {
             int v = Log.v(TAG, "message(" + JsonUtil.asJson(message) + ")");
 
             JsonNode jsonMsg = message.getMessage();
+            PubSubPojo dsMsg = JsonUtil.convert(jsonMsg, PubSubPojo.class);
+            if(!dsMsg.getMessage().equals("randomly fired on this channel"))
+            {
+                this.pubSubListAdapter.add(dsMsg);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadMessage(PNHistoryItemResult res)
+    {
+        try {
+
+            JsonNode jsonMsg = res.getEntry();
             PubSubPojo dsMsg = JsonUtil.convert(jsonMsg, PubSubPojo.class);
             if(!dsMsg.getMessage().equals("randomly fired on this channel"))
             {

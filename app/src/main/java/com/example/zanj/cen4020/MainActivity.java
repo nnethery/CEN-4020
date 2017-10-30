@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.ImmutableMap;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
@@ -18,6 +19,8 @@ import com.pubnub.api.callbacks.SubscribeCallback;
 import com.pubnub.api.enums.PNStatusCategory;
 import com.pubnub.api.models.consumer.PNPublishResult;
 import com.pubnub.api.models.consumer.PNStatus;
+import com.pubnub.api.models.consumer.history.PNHistoryItemResult;
+import com.pubnub.api.models.consumer.history.PNHistoryResult;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 import android.content.Intent;
@@ -47,7 +50,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         mPubSub = new PubSubListAdapter(this);
         mPubSubPnCallback = new PubSubPnCallback(mPubSub);
 
@@ -73,6 +75,7 @@ public class MainActivity extends Activity {
         pnConfiguration.setSecure(true);
         pubnub = new PubNub(pnConfiguration);
         initChannels();
+        loadMessages();
     }
 
     private final void initChannels()
@@ -81,10 +84,26 @@ public class MainActivity extends Activity {
         pubnub.subscribe().channels(PUBSUB_CHANNEL).withPresence().execute();
     }
 
+    public void loadMessages()
+    {
+        pubnub.history()
+                .channel(channelName)
+                .count(100)
+                .async(new PNCallback<PNHistoryResult>() {
+                    @Override
+                    public void onResponse(PNHistoryResult result, PNStatus status) {
+                        for(PNHistoryItemResult res : result.getMessages())
+                        {
+                            mPubSubPnCallback.loadMessage(res);
+                        }
+                    }
+                });
+    }
+
     public void publish(View view){
         final EditText mMessage = (EditText) MainActivity.this.findViewById(R.id.new_message);
         final Map<String, String> message = ImmutableMap.<String, String>of("sender", MainActivity.this.username, "message", mMessage.getText().toString(), "timestamp", DateTimeUtil.getTimeStampUtc());
-        MainActivity.this.pubnub.publish().channel(channelName).message(message).async(
+        MainActivity.this.pubnub.publish().channel(channelName).message(message).shouldStore(true).async(
                 new PNCallback<PNPublishResult>() {
                     @Override
                     public void onResponse(PNPublishResult result, PNStatus status) {
