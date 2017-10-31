@@ -68,6 +68,7 @@ public class MainActivity extends Activity {
         channelName = getIntent().getStringExtra("channel");
         username = getIntent().getStringExtra("username");
         PUBSUB_CHANNEL = Arrays.asList(channelName);
+        mPubSub.setUserAndChannel(username, channelName);
         PNConfiguration pnConfiguration = new PNConfiguration();
         pnConfiguration.setSubscribeKey("sub-c-ad43af60-b290-11e7-b4e4-2675c721e615");
         pnConfiguration.setPublishKey("pub-c-a499a424-2f8a-4205-9c96-2492afd6349f");

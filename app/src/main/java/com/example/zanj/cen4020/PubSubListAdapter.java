@@ -1,12 +1,16 @@
 package com.example.zanj.cen4020;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -16,6 +20,7 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
     private final Context context;
     private final LayoutInflater inflater;
     private final List<PubSubPojo> values = new ArrayList<PubSubPojo>();
+    String username, channelname;
 
     public PubSubListAdapter(Context context) {
         super(context, R.layout.list_row_pubsub);
@@ -37,7 +42,7 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        PubSubPojo dsMsg = this.values.get(position);
+        final PubSubPojo dsMsg = this.values.get(position);
         PubSubListRowUi msgView;
 
         if (convertView == null) {
@@ -50,9 +55,42 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
             msgView.timestamp = (TextView) convertView.findViewById(R.id.timestamp);
 
             convertView.setTag(msgView);
+
         } else {
             msgView = (PubSubListRowUi) convertView.getTag();
         }
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String usr = dsMsg.getSender();
+                String message = dsMsg.getMessage();
+                String time = dsMsg.getTimestamp();
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        context);
+                alertDialogBuilder.setTitle("Message Info");
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("Upvote?",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                //will store message upvoted
+                            }
+                        })
+                        .setNegativeButton("View Thread",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                    //will open thread activity once created
+                            }
+                        });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+
+            }
+        });
 
         msgView.sender.setText(dsMsg.getSender());
         msgView.message.setText(dsMsg.getMessage());
@@ -69,5 +107,11 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
     public void clear() {
         this.values.clear();
         notifyDataSetChanged();
+    }
+
+    public void setUserAndChannel(String user, String channel)
+    {
+        username = user;
+        channelname = channel;
     }
 }
