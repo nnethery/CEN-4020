@@ -23,9 +23,9 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
     String username, channelname;
 
     public PubSubListAdapter(Context context) {
-        super(context, R.layout.list_row_pubsub);
+        super(context, R.layout.list_row_pubsub); //set the contextview
         this.context = context;
-        this.inflater = LayoutInflater.from(context);
+        this.inflater = LayoutInflater.from(context); //inflate layout
     }
 
     @Override
@@ -36,7 +36,7 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
             @Override
             public void run() {
                 notifyDataSetChanged();
-            }
+            } //notifying that the listview has been updated
         });
     }
 
@@ -46,7 +46,7 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
         PubSubListRowUi msgView;
 
         if (convertView == null) {
-            msgView = new PubSubListRowUi();
+            msgView = new PubSubListRowUi(); //row template
 
             convertView = inflater.inflate(R.layout.list_row_pubsub, parent, false);
 
@@ -60,26 +60,26 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
             msgView = (PubSubListRowUi) convertView.getTag();
         }
 
-        convertView.setOnClickListener(new View.OnClickListener() {
+        convertView.setOnClickListener(new View.OnClickListener() { //makes each row clickable
             @Override
             public void onClick(View view) {
 
-                String usr = dsMsg.getSender();
+                String usr = dsMsg.getSender(); //obtains the username, message, and timestamp from the message that was clicked
                 String message = dsMsg.getMessage();
                 String time = dsMsg.getTimestamp();
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( //creating a dialog to alert the user
                         context);
                 alertDialogBuilder.setTitle("Message Info");
                 alertDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("Upvote?",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
+                            public void onClick(DialogInterface dialog,int id) { //not implemented yet
                                 //will store message upvoted
                             }
                         })
                         .setNegativeButton("View Thread",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
+                            public void onClick(DialogInterface dialog,int id) { //not implemented yet
                                     //will open thread activity once created
                             }
                         });
@@ -104,7 +104,7 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
         return this.values.size();
     }
 
-    public void clear() {
+    public void clear() { //clears the list
         this.values.clear();
         notifyDataSetChanged();
     }

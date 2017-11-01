@@ -39,11 +39,11 @@ import android.app.FragmentTransaction;
 public class MainActivity extends Activity {
     private static final String TAG = MainActivity.class.getName();
     String channelName, username;
-    PubNub pubnub;
-    private PubSubPnCallback mPubSubPnCallback;
-    private PubSubListAdapter mPubSub;
+    PubNub pubnub;                                                      //main connection the pubnub server
+    private PubSubPnCallback mPubSubPnCallback;                         //call back class for posting and loading messages
+    private PubSubListAdapter mPubSub;                                  //adapter that contains the list of messages
     public List<String> PUBSUB_CHANNEL;
-    PubSubTabContentFragment chatFrag;
+    PubSubTabContentFragment chatFrag;                                  //fragment stores the listview of messages
 
 
     @Override
@@ -59,20 +59,20 @@ public class MainActivity extends Activity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         //add a fragment
-        chatFrag = new PubSubTabContentFragment();
+        chatFrag = new PubSubTabContentFragment();                              //set the fragment
         fragmentTransaction.add(R.id.myfragment, chatFrag);
         fragmentTransaction.commit();
 
-        chatFrag.setAdapter(mPubSub);
+        chatFrag.setAdapter(mPubSub);                                           //add the adapter to the fragment
 
-        channelName = getIntent().getStringExtra("channel");
+        channelName = getIntent().getStringExtra("channel");                    //get the channel name and username
         username = getIntent().getStringExtra("username");
         PUBSUB_CHANNEL = Arrays.asList(channelName);
-        mPubSub.setUserAndChannel(username, channelName);
-        PNConfiguration pnConfiguration = new PNConfiguration();
-        pnConfiguration.setSubscribeKey("sub-c-ad43af60-b290-11e7-b4e4-2675c721e615");
+        mPubSub.setUserAndChannel(username, channelName);                       //setting the user and the channel
+        PNConfiguration pnConfiguration = new PNConfiguration();                //create a config
+        pnConfiguration.setSubscribeKey("sub-c-ad43af60-b290-11e7-b4e4-2675c721e615");  //set the subscribe and publish keys
         pnConfiguration.setPublishKey("pub-c-a499a424-2f8a-4205-9c96-2492afd6349f");
-        pnConfiguration.setUuid(username);
+        pnConfiguration.setUuid(username);                                      //set the username
         pnConfiguration.setSecure(true);
         pubnub = new PubNub(pnConfiguration);
         initChannels();
@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
         pubnub.subscribe().channels(PUBSUB_CHANNEL).withPresence().execute();
     }
 
-    public void loadMessages()
+    public void loadMessages()                      //load last 100 messages from the past 3 days
     {
         pubnub.history()
                 .channel(channelName)
@@ -95,13 +95,13 @@ public class MainActivity extends Activity {
                     public void onResponse(PNHistoryResult result, PNStatus status) {
                         for(PNHistoryItemResult res : result.getMessages())
                         {
-                            mPubSubPnCallback.loadMessage(res);
+                            mPubSubPnCallback.loadMessage(res);     //store the messages inside the listview
                         }
                     }
                 });
     }
 
-    public void publish(View view){
+    public void publish(View view){ //publish method for publishing the messages to the server
         final EditText mMessage = (EditText) MainActivity.this.findViewById(R.id.new_message);
         final Map<String, String> message = ImmutableMap.<String, String>of("sender", MainActivity.this.username, "message", mMessage.getText().toString(), "timestamp", DateTimeUtil.getTimeStampUtc());
         MainActivity.this.pubnub.publish().channel(channelName).message(message).shouldStore(true).async(

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
-public class PubSubPojo {
+public class PubSubPojo { //converts messages so they are easy to manipulate
     private final String sender;
     private final String message;
     private final String timestamp;

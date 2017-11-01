@@ -48,6 +48,8 @@ import java.util.concurrent.TimeUnit;
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.R.attr.phoneNumber;
 
+//This is the first screen of the app, prompts user for email/password or asks to register for an account
+
 /**
  * A login screen that offers login via email/password.
  */
@@ -125,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             Log.d("Auth", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.putExtra("username", username);
+                            intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
                             intent.putExtra("channel", channelName);
                             startActivity(intent);
 

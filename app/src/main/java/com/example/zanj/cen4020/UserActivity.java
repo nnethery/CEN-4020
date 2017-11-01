@@ -17,6 +17,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+//if the user doesnt have an account, this screen will come up if they press register.
+//no error checking is done besides the built in error checking from firebase, does not alert user
+//of any errors
+
 public class UserActivity extends AppCompatActivity {
 
     EditText emailET, passwordET, channelET;
@@ -55,7 +59,7 @@ public class UserActivity extends AppCompatActivity {
         username = emailET.getText().toString().split("@")[0];
         channel = channelET.getText().toString();
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
-        intent.putExtra("username", username);
+        intent.putExtra("username", username); //passes username and channel to the MainActivity class
         intent.putExtra("channel", channel);
         startActivity(intent);
     }

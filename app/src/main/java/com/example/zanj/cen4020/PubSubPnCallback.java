@@ -16,7 +16,7 @@ public class PubSubPnCallback extends SubscribeCallback {
     private final PubSubListAdapter pubSubListAdapter;
 
     public PubSubPnCallback(PubSubListAdapter pubSubListAdapter) {
-        this.pubSubListAdapter = pubSubListAdapter;
+        this.pubSubListAdapter = pubSubListAdapter; //set the adapter
     }
 
     @Override
@@ -35,7 +35,7 @@ public class PubSubPnCallback extends SubscribeCallback {
     }
 
     @Override
-    public void message(PubNub pubnub, PNMessageResult message) {
+    public void message(PubNub pubnub, PNMessageResult message) {       //posts a message to the pubsublistadapter
         try {
             int v = Log.v(TAG, "message(" + JsonUtil.asJson(message) + ")");
 
@@ -50,7 +50,7 @@ public class PubSubPnCallback extends SubscribeCallback {
         }
     }
 
-    public void loadMessage(PNHistoryItemResult res)
+    public void loadMessage(PNHistoryItemResult res) //loads messages from the past
     {
         try {
 
