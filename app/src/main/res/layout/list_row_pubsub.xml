@@ -11,6 +11,7 @@
             android:id="@+id/sender"
             android:text="Remote Device UUID"
             android:textSize="10sp"
+            android:paddingLeft="2dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -30,8 +31,15 @@
         android:text="this is a sample real-time message from the data stream network"
         android:textSize="12sp"
         android:paddingTop="2dp"
-        android:paddingBottom="6dp"
+        android:paddingLeft="2dp"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/upvotes"
+        android:text="0 upvotes"
+        android:textSize="10sp"
+        android:paddingLeft="2dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
 </LinearLayout>

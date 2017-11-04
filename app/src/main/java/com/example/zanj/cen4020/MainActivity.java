@@ -12,6 +12,13 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.ImmutableMap;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.callbacks.PNCallback;
@@ -36,6 +43,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
+import org.json.JSONObject;
+
 public class MainActivity extends Activity {
     private static final String TAG = MainActivity.class.getName();
     String channelName, username;
@@ -44,7 +53,7 @@ public class MainActivity extends Activity {
     private PubSubListAdapter mPubSub;                                  //adapter that contains the list of messages
     public List<String> PUBSUB_CHANNEL;
     PubSubTabContentFragment chatFrag;                                  //fragment stores the listview of messages
-
+    DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +86,24 @@ public class MainActivity extends Activity {
         pubnub = new PubNub(pnConfiguration);
         initChannels();
         loadMessages();
+        mPubSub.setPubNub(pubnub);
+        ref = FirebaseDatabase.getInstance().getReference("messageIDs");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    // TODO: handle the post
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
+
     }
 
     private final void initChannels()
@@ -103,9 +130,12 @@ public class MainActivity extends Activity {
 
     public void publish(View view){ //publish method for publishing the messages to the server
         final EditText mMessage = (EditText) MainActivity.this.findViewById(R.id.new_message);
-        final Map<String, String> message = ImmutableMap.<String, String>of("sender", MainActivity.this.username, "message", mMessage.getText().toString(), "timestamp", DateTimeUtil.getTimeStampUtc());
-        MainActivity.this.pubnub.publish().channel(channelName).message(message).shouldStore(true).async(
-                new PNCallback<PNPublishResult>() {
+        final String timestamp = DateTimeUtil.getTimeStampUtc();
+        final String key = ref.push().getKey();
+        ref.child(key).child("timestamp").setValue(timestamp);
+        final Map<String, String> message = ImmutableMap.<String, String>of("message_id", key, "sender", MainActivity.this.username, "message", mMessage.getText().toString(), "timestamp", timestamp, "upvotes", "0");
+        pubnub.publish().message(message).channel(channelName).shouldStore(true)
+                .async(new PNCallback<PNPublishResult>() {
                     @Override
                     public void onResponse(PNPublishResult result, PNStatus status) {
                         try {

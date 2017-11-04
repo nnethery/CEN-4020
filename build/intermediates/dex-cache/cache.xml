@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/e9cd42baec97b7f53adf1ce30016f1bc10638856/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f97cf85b0fe70d37a705111dafa6b1b418ea1650">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2380cfb049686abf775fe33407812b238bdccce4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-jackson/2.0.2/73283d1faf89c3f25f7b4ead5021d28734bcf982/converter-jackson-2.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="73283d1faf89c3f25f7b4ead5021d28734bcf982">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/converter-jackson-2.0.2_5fe420fd48811a8651843f1fe5f60f3b53c3597d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.pubnub/pubnub/4.0.5/18f2f4b1c7101edf4f2c3c7bfb9438b0b6396bd6/pubnub-4.0.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="18f2f4b1c7101edf4f2c3c7bfb9438b0b6396bd6">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/pubnub-4.0.5_c0abd6d198116a31dbd98d32e3cff8832f25165a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/e71a129f9383305d86f14d528649012bf224cb5a/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="508f50705b4fde51a16259f29c854201a3044516">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_08be86e8fa60fbb4e6185a5a0999573f555b4c8d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/eff6e39a762b7a95f44805ae9177b7772be99967/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="73c80b05a390e8319d1ef7a236739cd610c8f774">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_964d3983c0cc9fcde1b602003d74859f86cbd7a1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/d6c614ac949bb403e2117018801668dabae1524c/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b12cd9c87c3dfb012a911b6e38d2444ed0a65e1f">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5e8bb2d06aaffeab241fa2426ddd735e3725042e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/a101de0da201e021648870aa4ed66524ba477d1f/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="52339832d252da4328c5ffcacbc205268346362a">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7499b5b52468d7e54663e6d9b37f278c050cbeee/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/eb0080285040bc35e1e6f3c615aefa89705e5db4/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a37fc31c5ceeaa4532a37358add1b189d8db4af1">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3c522c1d9da7e9087faf95566d4bc40a621cd6e4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.0.0/a2d487452376193fc8c103dd2b9bd5f2b1b44563/common-1.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a2d487452376193fc8c103dd2b9bd5f2b1b44563">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/common-1.0.0_f06e614ecda2d7e3de19f001dd034ced79d6e8ab/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/4a486e59ae027899bd6a8bc75c72195997ae13b6/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="8040d53ecd4bd895360eafdc25e1c1cc9479e6aa">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f7bcc663e9b7075debe26b7782b82bb383c92fb9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.0.0/e414a4cb28434e25c4f6aa71426eb20cf4874ae9/common-1.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e414a4cb28434e25c4f6aa71426eb20cf4874ae9">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/common-1.0.0_4ff0146d6c7fff0a4ed27718759af11663bc5081/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-nop/1.7.21/8df71c65bfb1ca244d5fa174791b393762d0a5ed/slf4j-nop-1.7.21.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="8df71c65bfb1ca244d5fa174791b393762d0a5ed">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/slf4j-nop-1.7.21_db6eca49fb9cc469a78b2b0fafad608917dabf10/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/e5b887187e609a93189f36d067279d4993b241e1/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b62fdc4cfef174c1e456014195c83fa7de7dc041">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2c31931077ddfa6b0c387b7e2266e07a0b2df1a7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/20.0/89507701249388e1ed5ddcf8c41f4ce1be7831ef/guava-20.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="89507701249388e1ed5ddcf8c41f4ce1be7831ef">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/guava-20.0_82f99cb8f26bee0950b2878c2e9dca09d1374397/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/d9bf813d38c68661b1bbd3f8cf39969d7a79ff70/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="5f519b8c692038a47ee404b6ea6b847f6402000c">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9cb10b7934a27cd20404814bd798a128af3ba062/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/372dc8299af12bb33cf59727727b9c3a8c96227a/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="643a2fd3bd06c44be5d20efc0ba4ca02036d2c8a">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_dd6750f1b593846e9544b4338f4deb2258d93629/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.7.3/e250c11c1329c7b6b62442a9743befad78be553c/jackson-annotations-2.7.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e250c11c1329c7b6b62442a9743befad78be553c">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/jackson-annotations-2.7.3_1adc2029a70f7121f2d378d8a92dc5b9f3b3e70b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.2.0/f7873a2ebde246a45c2a8d6f3247108b4c88a879/okhttp-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f7873a2ebde246a45c2a8d6f3247108b4c88a879">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.2.0_9ff292eb3a65fb2957c5b26beacd2ad4cd7163ac/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/057676dfc56b559101f68492b6685dd5dd5ec93e/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="2442771a5590dd4eb4bce00c2e9dca9e22e4c963">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c3382d7662b8cfa4b40a6e0dc53dd44d94e43987/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/e08a4fcb73588c43fc40622658295fddcc9d3726/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="20d6aa9a18ea9833cd2bee95dff7cd303cdb80e4">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8e68eedca7ef05005e4353359f3081f6dada8fc3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.6.0_0414bd50cedfa4c12e91c5c53300076273b1ad2a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.9.4/1c295b462f16702ebe720bbb08f62e1ba80da41b/joda-time-2.9.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1c295b462f16702ebe720bbb08f62e1ba80da41b">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/joda-time-2.9.4_fd31ddf10b7393b945c7f40b755ff210d7c442e8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/c61a32a7b6da5e2a728771121972d9cfcff08cd2/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_03358abd12d65f162a1aedd2919cc16bd79e859e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.7.3/1499b854ae9f370409792db5af1b552dc7d9682f/jackson-core-2.7.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1499b854ae9f370409792db5af1b552dc7d9682f">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/jackson-core-2.7.3_0a8be48248da07f0bf5650735471439676f1bc2b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/c2679420c365c43fff34fe81f8bc4442880d9b68/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c2cadea4d8a1a5b5c4e5f0dc99a99a43774f5e6e">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0739c27f663175e1d4bb3e9b93c70038d5835ad1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.0.2/43eeae0b9fb087bb3194ba59ab63a38a32fbf3e/retrofit-2.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="043eeae0b9fb087bb3194ba59ab63a38a32fbf3e">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/retrofit-2.0.2_b64366202075234bf00a4cd286db39bf916e98f8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/2b00a2cf789b3d6f6fdf547001f2a3a32d433ac9/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_018810e093c0f3229f0f8214704b40f412100911/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/223e8061e7e9cc74c4bfe72c1591786413fde1b0/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8130264495e9da85c53aeb3eb1d06897737cea6b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/0a6946fc072446350d04ebcfe31048e1a82473d4/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f428e2fbc9ed0b297e3a3f420e51e6982f66822d">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f609f3e2eae98c1559d63798845a61a54b407f5f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/346640ee195e4cb3d9e6c0e9119a5df411757ec9/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="233f60a165ae622c8b36731502ebbda0f65e1930">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_48bc3a93e493a0c0fa5464839e9f5cc2758facf5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/logging-interceptor/3.2.0/a56f28d5b7fab623c6c1d2afa08dd496d873ac21/logging-interceptor-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a56f28d5b7fab623c6c1d2afa08dd496d873ac21">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/logging-interceptor-3.2.0_afb1a6748d6a51442566669a190e3164361c04fa/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/6cbfbc06ec797dabf4d96fdf15bc28b9c6eb7d17/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="40392f30a601db5675cdf18192aab013d6fee6ec">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3c51214612d309435cbe7924e71575ff8df4442d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/fe41f319ef85436f19c52dbf977ea1cd2fcf3665/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="58b12bdb21a84f22e0dc3b047aeceb0a546b1b44">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c764cff00cdaf5bd10fdecf71916d275eb3bff75/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/constraint-layout-solver-1.0.2_1b884833295dd8861587be823fb19a19a2e9ff26/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/6aa0fd7a1b4f56dc8a89f02c0078c060f1a5ed25/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="6e6b94b72d7912a627fb1629c310b2bca9261f06">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7a30fd47e1e21659ce239cd31590c36a18bb1019/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/b9d388384be825e530cd11c324792a0d9877beac/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="bed98ea7af8c5c4202820875e856dd3eb296e22d">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6ffd0c53245421db81edb655a2a2d1b3fe99a395/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.21/139535a69a4239db087de9bab0bee568bf8e0b70/slf4j-api-1.7.21.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="139535a69a4239db087de9bab0bee568bf8e0b70">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/slf4j-api-1.7.21_400b4df52ca36935db80f93d5561aad5ed47b29c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/26.1.0/814258103cf26a15fcc26ecce35f5b7d24b73f8/support-annotations-26.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="0814258103cf26a15fcc26ecce35f5b7d24b73f8">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-26.1.0_becc35e0f97e228d5d28a6d3e72d0c90f7a49244/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.7.3/f12e6cd05cbaecd74d16e685d45b627732939e42/jackson-databind-2.7.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f12e6cd05cbaecd74d16e685d45b627732939e42">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/jackson-databind-2.7.3_7a1dacc8d8882c4c99230dfe1b018c6b5c0a32d4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/06304ffa9bee4b2ce8d56fa8824ad92ed1bb42d9/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="6f4138a4e065826cb044d49faea4cfd7191773d1">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b7bb4cc1eb3861f685adb10c177aaa037d4ab78c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/5cc4d2dd4e69b255ae1163530e7565c3673dd9bb/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="7efef32744ca4a436492d5cf28c08698cc2af256">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b461ec124ab06a90316a9141c98fe8e8c9db6593/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexistayor/.android/build-cache/5554176cbd530a454ddf639bd18b5a3920a1e095/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="2d45b277afdf55bcfdc005c03c0c2f1733aaa1b0">
+        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_90c0dd581e89562fedff809501559dce270340a6/classes.dex" />
+    </item>
+
+</items>

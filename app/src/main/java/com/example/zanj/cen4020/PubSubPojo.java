@@ -8,11 +8,15 @@ public class PubSubPojo { //converts messages so they are easy to manipulate
     private final String sender;
     private final String message;
     private final String timestamp;
+    private final String message_id;
+    private final String upvotes;
 
-    public PubSubPojo(@JsonProperty("sender") String sender, @JsonProperty("message") String message, @JsonProperty("timestamp") String timestamp) {
+    public PubSubPojo(@JsonProperty("message_id") String message_id, @JsonProperty("sender") String sender, @JsonProperty("message") String message, @JsonProperty("timestamp") String timestamp, @JsonProperty("upvotes") String upvotes) {
         this.sender = sender;
         this.message = message;
         this.timestamp = timestamp;
+        this.message_id = message_id;
+        this.upvotes = upvotes;
     }
 
     public String getSender() {
@@ -26,6 +30,10 @@ public class PubSubPojo { //converts messages so they are easy to manipulate
     public String getTimestamp() {
         return timestamp;
     }
+
+    public String getMessage_id() { return message_id; }
+
+    public String getUpvotes() { return upvotes; }
 
     @Override
     public boolean equals(Object obj) {
@@ -42,12 +50,14 @@ public class PubSubPojo { //converts messages so they are easy to manipulate
 
         return Objects.equal(this.sender, other.sender)
                 && Objects.equal(this.message, other.message)
-                && Objects.equal(this.timestamp, other.timestamp);
+                && Objects.equal(this.timestamp, other.timestamp)
+                && Objects.equal(this.message_id, other.message_id)
+                && Objects.equal(this.upvotes, other.upvotes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(sender, message, timestamp);
+        return Objects.hashCode(sender, message, timestamp, message_id, upvotes);
     }
 
     @Override
@@ -56,6 +66,8 @@ public class PubSubPojo { //converts messages so they are easy to manipulate
                 .add("sender", sender)
                 .add("message", message)
                 .add("timestamp", timestamp)
+                .add("message_id", message_id)
+                .add("upvotes", upvotes)
                 .toString();
     }
 }
