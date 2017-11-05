@@ -122,24 +122,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("Auth", "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
-                            intent.putExtra("channel", channelName);
-                            startActivity(intent);
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("Auth", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                        if(!channelName.contains(".")) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("Auth", "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
+                                intent.putExtra("channel", channelName);
+                                startActivity(intent);
 
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w("Auth", "signInWithEmail:failure", task.getException());
+                                Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+
+                            }
+                            // ...
                         }
-
-                        // ...
+                        else{
+                            Toast.makeText(LoginActivity.this, "Invalid Channel Name. Channel Name cannot contain \".\"",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
