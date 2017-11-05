@@ -41,7 +41,7 @@ public class PubSubPnCallback extends SubscribeCallback {
 
             JsonNode jsonMsg = message.getMessage();
             PubSubPojo dsMsg = JsonUtil.convert(jsonMsg, PubSubPojo.class);
-            if(!dsMsg.getMessage().equals("randomly fired on this channel"))
+            if(!dsMsg.getMessage().equals("randomly fired on this channel")) //don't want to publish the presence data
             {
                 this.pubSubListAdapter.add(dsMsg);
             }
@@ -56,7 +56,7 @@ public class PubSubPnCallback extends SubscribeCallback {
 
             JsonNode jsonMsg = res.getEntry();
             PubSubPojo dsMsg = JsonUtil.convert(jsonMsg, PubSubPojo.class);
-            if(!dsMsg.getMessage().equals("randomly fired on this channel"))
+            if(!dsMsg.getMessage().equals("randomly fired on this channel")) //don't want to publish the presence data
             {
                 this.pubSubListAdapter.add(dsMsg);
             }

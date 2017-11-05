@@ -45,6 +45,7 @@ import android.app.FragmentTransaction;
 
 import org.json.JSONObject;
 
+//Main class that contains the messages
 public class MainActivity extends Activity {
     private static final String TAG = MainActivity.class.getName();
     String channelName, username;
@@ -84,11 +85,11 @@ public class MainActivity extends Activity {
         pnConfiguration.setUuid(username);                                      //set the username
         pnConfiguration.setSecure(true);
         pubnub = new PubNub(pnConfiguration);
-        initChannels();
+        initChannels(); //initialize channels and load message hirtory
         loadMessages();
-        mPubSub.setPubNub(pubnub);
-        ref = FirebaseDatabase.getInstance().getReference("messageIDs");
-        ref.addValueEventListener(new ValueEventListener() {
+        mPubSub.setPubNub(pubnub);  //passing the pubnub instance to an additional class
+        ref = FirebaseDatabase.getInstance().getReference("messageIDs");    //get an instance of the firebase database
+        ref.addValueEventListener(new ValueEventListener() { //for firebase database, not in use currently
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
@@ -131,10 +132,10 @@ public class MainActivity extends Activity {
     public void publish(View view){ //publish method for publishing the messages to the server
         final EditText mMessage = (EditText) MainActivity.this.findViewById(R.id.new_message);
         final String timestamp = DateTimeUtil.getTimeStampUtc();
-        final String key = ref.push().getKey();
-        ref.child(key).child("timestamp").setValue(timestamp);
+        final String key = ref.push().getKey(); //get a unique hashed key for this message and add to firebase, necessary for message ids and threads
+        ref.child(key).child("timestamp").setValue(timestamp); //add the message ID and timestamp to firebase, will use in future for deletion of firebase entries
         final Map<String, String> message = ImmutableMap.<String, String>of("message_id", key, "sender", MainActivity.this.username, "message", mMessage.getText().toString(), "timestamp", timestamp, "upvotes", "0");
-        pubnub.publish().message(message).channel(channelName).shouldStore(true)
+        pubnub.publish().message(message).channel(channelName).shouldStore(true) //publish the message to the channel
                 .async(new PNCallback<PNPublishResult>() {
                     @Override
                     public void onResponse(PNPublishResult result, PNStatus status) {

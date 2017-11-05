@@ -41,11 +41,11 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
     public void add(PubSubPojo message) {
         int i = 0;
         Boolean edit = false;
-        for(PubSubPojo msg : values)
+        for(PubSubPojo msg : values) //needed for upvoting, need to determine if there is a duplicate message
         {
             if(msg.getMessage_id().equals(message.getMessage_id()))
             {
-                values.set(i, message);
+                values.set(i, message); //replace the older message with the newer one that has more upvotes
                 edit = true;
                 break;
             }
@@ -86,7 +86,7 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
             @Override
             public void onClick(View view) {
 
-                final String usr = dsMsg.getSender(); //obtains the username, message, and timestamp from the message that was clicked
+                final String usr = dsMsg.getSender(); //obtains the username, message, upvotes, messageID and timestamp from the message that was clicked
                 final String message1 = dsMsg.getMessage();
                 final String time = dsMsg.getTimestamp();
                 String upvotes = dsMsg.getUpvotes();
@@ -102,12 +102,12 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
                     alertDialogBuilder
                             .setCancelable(true)
                             .setPositiveButton("Upvote?", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) { //not implemented yet
+                                public void onClick(DialogInterface dialog, int id) {
 
                                     String newUpvote = String.valueOf(upvoteInt + 1);
                                     //will store message upvoted
                                     final Map<String, String> message = ImmutableMap.<String, String>of("message_id", message_id, "sender", usr, "message", message1, "timestamp", time, "upvotes", newUpvote);
-                                    pn.publish().message(message).channel(channelname).shouldStore(true)
+                                    pn.publish().message(message).channel(channelname).shouldStore(true) //publish message
                                             .async(new PNCallback<PNPublishResult>() {
                                                        @Override
                                                        public void onResponse(PNPublishResult result, PNStatus status) {
@@ -151,7 +151,7 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
                                     String newUpvote = String.valueOf(upvoteInt + 1);
                                     //will store message upvoted
                                     final Map<String, String> message = ImmutableMap.<String, String>of("message_id", message_id, "sender", usr, "message", message1, "timestamp", time, "upvotes", newUpvote);
-                                    pn.publish().message(message).channel(channelname).shouldStore(true)
+                                    pn.publish().message(message).channel(channelname).shouldStore(true) //publish message
                                             .async(new PNCallback<PNPublishResult>() {
                                                        @Override
                                                        public void onResponse(PNPublishResult result, PNStatus status) {
@@ -173,7 +173,7 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
                             })
                             .setNegativeButton("Leave Thread", new DialogInterface.OnClickListener()
                             {
-                                public void onClick(DialogInterface dialog, int id) { //not implemented yet
+                                public void onClick(DialogInterface dialog, int id) {
                                     int dot = channelname.indexOf(".");
                                     String chan = channelname.substring(0,dot);
                                     Intent intent = new Intent(context, MainActivity.class);
@@ -192,7 +192,7 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
 
             }
         });
-
+        //set the textviews for each aspect of the message
         msgView.sender.setText(dsMsg.getSender());
         msgView.message.setText(dsMsg.getMessage());
         msgView.timestamp.setText(dsMsg.getTimestamp());
@@ -212,7 +212,7 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
         notifyDataSetChanged();
     }
 
-    public void setUserAndChannel(String user, String channel)
+    public void setUserAndChannel(String user, String channel) //set username and channel
     {
         username = user;
         channelname = channel;
@@ -221,5 +221,5 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
     public void setPubNub(PubNub pub)
     {
         pn = pub;
-    }
+    } //set pubnub instance
 }

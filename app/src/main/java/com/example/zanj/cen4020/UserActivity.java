@@ -38,10 +38,10 @@ public class UserActivity extends AppCompatActivity {
 
     }
 
-    public void loginClicked(View v)
+    public void loginClicked(View v) //no error checking is done yet, only what firebase already does
     {
-        email = emailET.getText().toString();
-        password = passwordET.getText().toString();
+        email = emailET.getText().toString(); //get email
+        password = passwordET.getText().toString(); //get password
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -56,8 +56,8 @@ public class UserActivity extends AppCompatActivity {
                         }
                     }
                 });
-        username = emailET.getText().toString().split("@")[0];
-        channel = channelET.getText().toString();
+        username = emailET.getText().toString().split("@")[0]; //get just the username
+        channel = channelET.getText().toString(); //get channel name
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         intent.putExtra("username", username); //passes username and channel to the MainActivity class
         intent.putExtra("channel", channel);

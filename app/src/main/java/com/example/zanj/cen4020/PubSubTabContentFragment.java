@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+//fragment that contains the listview
 public class PubSubTabContentFragment extends Fragment {
     private PubSubListAdapter psAdapter; //fragment that stores the listview
     @Override

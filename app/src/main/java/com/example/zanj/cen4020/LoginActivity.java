@@ -425,7 +425,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
-    public void registerClicked(View v)
+    public void registerClicked(View v) //if user is not currently registered
     {
         Intent intent = new Intent(this, UserActivity.class);
         startActivity(intent);

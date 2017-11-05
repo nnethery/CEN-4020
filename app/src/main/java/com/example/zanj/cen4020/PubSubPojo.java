@@ -18,7 +18,7 @@ public class PubSubPojo { //converts messages so they are easy to manipulate
         this.message_id = message_id;
         this.upvotes = upvotes;
     }
-
+    //get functions for getting info about a message
     public String getSender() {
         return sender;
     }
