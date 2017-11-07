@@ -46,6 +46,7 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '20.0'
     compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.facebook.android:facebook-login:[4,5)'
     testCompile 'junit:junit:4.12'
 }
 
