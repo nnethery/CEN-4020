@@ -78,11 +78,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView, mChannelName;
     private View mProgressView;
     private View mLoginFormView;
+    String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        userType = getIntent().getStringExtra("type");
         mAuth = FirebaseAuth.getInstance();
 
         setContentView(R.layout.activity_login);
@@ -131,6 +132,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
                                 intent.putExtra("channel", channelName);
+                                intent.putExtra("type", userType);
                                 startActivity(intent);
 
                             } else {
@@ -428,6 +430,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void registerClicked(View v) //if user is not currently registered
     {
         Intent intent = new Intent(this, UserActivity.class);
+        intent.putExtra("type", userType);
         startActivity(intent);
     }
 }

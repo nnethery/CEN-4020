@@ -55,13 +55,16 @@ public class MainActivity extends Activity {
     public List<String> PUBSUB_CHANNEL;
     PubSubTabContentFragment chatFrag;                                  //fragment stores the listview of messages
     DatabaseReference ref;
+    String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mPubSub = new PubSubListAdapter(this);
-        mPubSubPnCallback = new PubSubPnCallback(mPubSub);
+        userType = getIntent().getStringExtra("type");
+        channelName = getIntent().getStringExtra("channel");                    //get the channel name and username
+        username = getIntent().getStringExtra("username");
+        mPubSub = new PubSubListAdapter(this, userType);
+        mPubSubPnCallback = new PubSubPnCallback(mPubSub, getApplicationContext());
 
         setContentView(R.layout.activity_main);
 
@@ -74,9 +77,14 @@ public class MainActivity extends Activity {
         fragmentTransaction.commit();
 
         chatFrag.setAdapter(mPubSub);                                           //add the adapter to the fragment
-
-        channelName = getIntent().getStringExtra("channel");                    //get the channel name and username
-        username = getIntent().getStringExtra("username");
+        if(channelName.contains("."))
+        {
+            String originalMessage = getIntent().getStringExtra("originalMessage");
+            String originalSender = getIntent().getStringExtra("originalSender");
+            chatFrag.setUserAndChannel("Hello: " + username + ", Replying to " + originalSender + "'s message: " + originalMessage);
+        }
+        else
+            chatFrag.setUserAndChannel("Hello: " + username + ", Channel: " + channelName);
         PUBSUB_CHANNEL = Arrays.asList(channelName);
         mPubSub.setUserAndChannel(username, channelName);                       //setting the user and the channel
         PNConfiguration pnConfiguration = new PNConfiguration();                //create a config

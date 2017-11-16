@@ -40,6 +40,7 @@ public class UserActivity extends AppCompatActivity {
 
     public void loginClicked(View v) //no error checking is done yet, only what firebase already does
     {
+        String userType = getIntent().getStringExtra("type");
         email = emailET.getText().toString(); //get email
         password = passwordET.getText().toString(); //get password
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -61,6 +62,7 @@ public class UserActivity extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         intent.putExtra("username", username); //passes username and channel to the MainActivity class
         intent.putExtra("channel", channel);
+        intent.putExtra("type", userType);
         startActivity(intent);
     }
 

@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Collections;
+import java.util.Comparator;
 
 import com.google.common.collect.ImmutableMap;
 import com.pubnub.api.PubNub;
@@ -30,11 +32,20 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
     private final List<PubSubPojo> values = new ArrayList<PubSubPojo>();
     String username, channelname;
     PubNub pn;
+    String userType;
 
-    public PubSubListAdapter(Context context) {
+    public PubSubListAdapter(Context context, String type) {
         super(context, R.layout.list_row_pubsub); //set the contextview
         this.context = context;
         this.inflater = LayoutInflater.from(context); //inflate layout
+        this.userType = type;
+    }
+
+    public class CustomComparator implements Comparator<PubSubPojo> {
+        @Override
+        public int compare(PubSubPojo o1, PubSubPojo o2) {
+            return o2.getUpvotes().compareTo(o1.getUpvotes());
+        }
     }
 
     @Override
@@ -53,6 +64,9 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
         }
         if(edit == false)
             this.values.add(0, message);
+
+        if(userType.equals("teacher")) //teacher only views messages by most upvoted
+            Collections.sort(values, new CustomComparator());
 
         ((Activity) this.context).runOnUiThread(new Runnable() {
             @Override
@@ -81,117 +95,117 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
         } else {
             msgView = (PubSubListRowUi) convertView.getTag();
         }
+        if(!userType.equals("teacher")) { //teacher cannot view thread or upvote message
+            convertView.setOnClickListener(new View.OnClickListener() { //makes each row clickable
+                @Override
+                public void onClick(View view) {
 
-        convertView.setOnClickListener(new View.OnClickListener() { //makes each row clickable
-            @Override
-            public void onClick(View view) {
+                    final String usr = dsMsg.getSender(); //obtains the username, message, upvotes, messageID and timestamp from the message that was clicked
+                    final String message1 = dsMsg.getMessage();
+                    final String time = dsMsg.getTimestamp();
+                    String upvotes = dsMsg.getUpvotes();
+                    final int upvoteInt = Integer.parseInt(upvotes);
+                    final String message_id = dsMsg.getMessage_id();
 
-                final String usr = dsMsg.getSender(); //obtains the username, message, upvotes, messageID and timestamp from the message that was clicked
-                final String message1 = dsMsg.getMessage();
-                final String time = dsMsg.getTimestamp();
-                String upvotes = dsMsg.getUpvotes();
-                final int upvoteInt = Integer.parseInt(upvotes);
-                final String message_id = dsMsg.getMessage_id();
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( //creating a dialog to alert the user
+                            context);
+                    alertDialogBuilder.setTitle("Message Info");
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( //creating a dialog to alert the user
-                        context);
-                alertDialogBuilder.setTitle("Message Info");
+                    // if current channel is NOT a thread
+                    if (!channelname.contains(".")) {
+                        alertDialogBuilder
+                                .setCancelable(true)
+                                .setPositiveButton("Upvote?", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
 
-                // if current channel is NOT a thread
-                if(!channelname.contains(".")) {
-                    alertDialogBuilder
-                            .setCancelable(true)
-                            .setPositiveButton("Upvote?", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-
-                                    String newUpvote = String.valueOf(upvoteInt + 1);
-                                    //will store message upvoted
-                                    final Map<String, String> message = ImmutableMap.<String, String>of("message_id", message_id, "sender", usr, "message", message1, "timestamp", time, "upvotes", newUpvote);
-                                    pn.publish().message(message).channel(channelname).shouldStore(true) //publish message
-                                            .async(new PNCallback<PNPublishResult>() {
-                                                       @Override
-                                                       public void onResponse(PNPublishResult result, PNStatus status) {
-                                                           try {
-                                                               if (!status.isError()) {
-                                                                   Log.v("App", "publish(" + JsonUtil.asJson(result) + ")");
-                                                               } else {
-                                                                   Log.v("App", "publishErr(" + JsonUtil.asJson(status) + ")");
+                                        String newUpvote = String.valueOf(upvoteInt + 1);
+                                        //will store message upvoted
+                                        final Map<String, String> message = ImmutableMap.<String, String>of("message_id", message_id, "sender", usr, "message", message1, "timestamp", time, "upvotes", newUpvote);
+                                        pn.publish().message(message).channel(channelname).shouldStore(true) //publish message
+                                                .async(new PNCallback<PNPublishResult>() {
+                                                           @Override
+                                                           public void onResponse(PNPublishResult result, PNStatus status) {
+                                                               try {
+                                                                   if (!status.isError()) {
+                                                                       Log.v("App", "publish(" + JsonUtil.asJson(result) + ")");
+                                                                   } else {
+                                                                       Log.v("App", "publishErr(" + JsonUtil.asJson(status) + ")");
+                                                                   }
+                                                               } catch (Exception e) {
+                                                                   e.printStackTrace();
                                                                }
-                                                           } catch (Exception e) {
-                                                               e.printStackTrace();
                                                            }
                                                        }
-                                                   }
-                                            );
+                                                );
 
 
-                                }
-                            })
-                            .setNegativeButton("View Thread", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) { //enters the thread, which is a channel with the name channel.message_id
-                                    String chan = channelname + "." + dsMsg.getMessage_id();
-                                    Intent intent = new Intent(context, MainActivity.class);
-                                    intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
-                                    intent.putExtra("channel", chan);
+                                    }
+                                })
+                                .setNegativeButton("View Thread", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) { //enters the thread, which is a channel with the name channel.message_id
+                                        String chan = channelname + "." + dsMsg.getMessage_id();
+                                        Intent intent = new Intent(context, MainActivity.class);
+                                        intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
+                                        intent.putExtra("channel", chan);
+                                        intent.putExtra("type", userType);
+                                        intent.putExtra("originalMessage", dsMsg.getMessage());
+                                        intent.putExtra("originalSender", dsMsg.getSender());
+                                        context.startActivity(intent);
+                                    }
+                                });
 
-                                    Toast.makeText(context, chan, Toast.LENGTH_LONG).show();
+                    } else    // if current channel IS a thread
+                    {
+                        alertDialogBuilder
+                                .setCancelable(true)
+                                .setPositiveButton("Upvote?", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) { //goes back to list of threads, which is the channel name before the "."
 
-                                    context.startActivity(intent);
-                                }
-                            });
-
-                }
-                else    // if current channel IS a thread
-                {
-                    alertDialogBuilder
-                            .setCancelable(true)
-                            .setPositiveButton("Upvote?", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) { //goes back to list of threads, which is the channel name before the "."
-
-                                    String newUpvote = String.valueOf(upvoteInt + 1);
-                                    //will store message upvoted
-                                    final Map<String, String> message = ImmutableMap.<String, String>of("message_id", message_id, "sender", usr, "message", message1, "timestamp", time, "upvotes", newUpvote);
-                                    pn.publish().message(message).channel(channelname).shouldStore(true) //publish message
-                                            .async(new PNCallback<PNPublishResult>() {
-                                                       @Override
-                                                       public void onResponse(PNPublishResult result, PNStatus status) {
-                                                           try {
-                                                               if (!status.isError()) {
-                                                                   Log.v("App", "publish(" + JsonUtil.asJson(result) + ")");
-                                                               } else {
-                                                                   Log.v("App", "publishErr(" + JsonUtil.asJson(status) + ")");
+                                        String newUpvote = String.valueOf(upvoteInt + 1);
+                                        //will store message upvoted
+                                        final Map<String, String> message = ImmutableMap.<String, String>of("message_id", message_id, "sender", usr, "message", message1, "timestamp", time, "upvotes", newUpvote);
+                                        pn.publish().message(message).channel(channelname).shouldStore(true) //publish message
+                                                .async(new PNCallback<PNPublishResult>() {
+                                                           @Override
+                                                           public void onResponse(PNPublishResult result, PNStatus status) {
+                                                               try {
+                                                                   if (!status.isError()) {
+                                                                       Log.v("App", "publish(" + JsonUtil.asJson(result) + ")");
+                                                                   } else {
+                                                                       Log.v("App", "publishErr(" + JsonUtil.asJson(status) + ")");
+                                                                   }
+                                                               } catch (Exception e) {
+                                                                   e.printStackTrace();
                                                                }
-                                                           } catch (Exception e) {
-                                                               e.printStackTrace();
                                                            }
                                                        }
-                                                   }
-                                            );
+                                                );
 
 
-                                }
-                            })
-                            .setNegativeButton("Leave Thread", new DialogInterface.OnClickListener()
-                            {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    int dot = channelname.indexOf(".");
-                                    String chan = channelname.substring(0,dot);
-                                    Intent intent = new Intent(context, MainActivity.class);
-                                    intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
-                                    intent.putExtra("channel", chan);
+                                    }
+                                })
+                                .setNegativeButton("Leave Thread", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        int dot = channelname.indexOf(".");
+                                        String chan = channelname.substring(0, dot);
+                                        Intent intent = new Intent(context, MainActivity.class);
+                                        intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
+                                        intent.putExtra("channel", chan);
+                                        intent.putExtra("type", userType);
 
-                                    context.startActivity(intent);
-                                }
-                            });
+                                        context.startActivity(intent);
+                                    }
+                                });
+                    }
+
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+
+                    // show it
+                    alertDialog.show();
+
                 }
-
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();
-
-            }
-        });
+            });
+        }
         //set the textviews for each aspect of the message
         msgView.sender.setText(dsMsg.getSender());
         msgView.message.setText(dsMsg.getMessage());
