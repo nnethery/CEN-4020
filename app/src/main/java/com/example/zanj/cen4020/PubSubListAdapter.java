@@ -44,6 +44,18 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
     public class CustomComparator implements Comparator<PubSubPojo> {
         @Override
         public int compare(PubSubPojo o1, PubSubPojo o2) {
+            if(o1.getUpvotes().equals("null") && !o2.getUpvotes().equals("null"))
+            {
+                return 1;
+            }
+            else if(!o1.getUpvotes().equals("null") && o2.getUpvotes().equals("null"))
+            {
+                return -1;
+            }
+            else if(o1.getUpvotes().equals("null") && o2.getUpvotes().equals("null"))
+            {
+                return 0;
+            }
             return o2.getUpvotes().compareTo(o1.getUpvotes());
         }
     }
@@ -95,7 +107,8 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
         } else {
             msgView = (PubSubListRowUi) convertView.getTag();
         }
-        if(!userType.equals("teacher")) { //teacher cannot view thread or upvote message
+        if(!userType.equals("teacher") && !dsMsg.getUpvotes().equals("null")) { //teacher cannot view thread or upvote message
+            //a teacher's message cannot be made a thread and cannot be upvoted
             convertView.setOnClickListener(new View.OnClickListener() { //makes each row clickable
                 @Override
                 public void onClick(View view) {
@@ -210,7 +223,15 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
         msgView.sender.setText(dsMsg.getSender());
         msgView.message.setText(dsMsg.getMessage());
         msgView.timestamp.setText(dsMsg.getTimestamp());
-        msgView.upvotes.setText(dsMsg.getUpvotes() + " upvotes");
+        if(dsMsg.getUpvotes().equals("null"))
+        {
+            msgView.sender.setText("Instructor");
+            msgView.upvotes.setText(""); //teacher's message should not allow upvotes
+        }
+        else
+        {
+            msgView.upvotes.setText(dsMsg.getUpvotes() + " upvotes");
+        }
 
 
         return convertView;

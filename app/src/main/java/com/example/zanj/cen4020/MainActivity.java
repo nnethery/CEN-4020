@@ -142,8 +142,15 @@ public class MainActivity extends Activity {
         final String timestamp = DateTimeUtil.getTimeStampUtc();
         final String key = ref.push().getKey(); //get a unique hashed key for this message and add to firebase, necessary for message ids and threads
         ref.child(key).child("timestamp").setValue(timestamp); //add the message ID and timestamp to firebase, will use in future for deletion of firebase entries
-        final Map<String, String> message = ImmutableMap.<String, String>of("message_id", key, "sender", MainActivity.this.username, "message", mMessage.getText().toString(), "timestamp", timestamp, "upvotes", "0");
-        pubnub.publish().message(message).channel(channelName).shouldStore(true) //publish the message to the channel
+        Map<String, String> message = null;
+        if(userType.equals("teacher"))
+        {
+            message = ImmutableMap.<String, String>of("message_id", key, "sender", MainActivity.this.username, "message", mMessage.getText().toString(), "timestamp", timestamp, "upvotes", "null");
+        }
+        else {
+            message = ImmutableMap.<String, String>of("message_id", key, "sender", MainActivity.this.username, "message", mMessage.getText().toString(), "timestamp", timestamp, "upvotes", "0");
+        }
+            pubnub.publish().message(message).channel(channelName).shouldStore(true) //publish the message to the channel
                 .async(new PNCallback<PNPublishResult>() {
                     @Override
                     public void onResponse(PNPublishResult result, PNStatus status) {
