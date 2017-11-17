@@ -10,15 +10,13 @@ public class PubSubPojo { //converts messages so they are easy to manipulate
     private final String timestamp;
     private final String message_id;
     private final String upvotes;
-    private final String upvoted;
 
     public PubSubPojo(@JsonProperty("message_id") String message_id, @JsonProperty("sender") String sender, @JsonProperty("message") String message, @JsonProperty("timestamp") String timestamp, @JsonProperty("upvotes") String upvotes) {
         this.sender = sender;
         this.message = message;
         this.timestamp = timestamp;
         this.message_id = message_id;
-        this.upvoted = upvotes;
-        this.upvotes = this.getUpvotes();
+        this.upvotes = upvotes;
     }
     //get functions for getting info about a message
     public String getSender() {
@@ -35,22 +33,7 @@ public class PubSubPojo { //converts messages so they are easy to manipulate
 
     public String getMessage_id() { return message_id; }
 
-    public String getUpvotes()
-    {
-        if (upvoted.equals("null"))
-        {
-            return "null";
-        }
-        int count = 0;
-        for (char c : upvoted.toCharArray()) {
-            if (c == ' ') {
-                count++;
-            }
-        }
-        return Integer.toString(count);
-    }
-
-    public String getUpvoted() { return upvoted; }
+    public String getUpvotes() { return upvotes; }
 
     @Override
     public boolean equals(Object obj) {
@@ -84,7 +67,7 @@ public class PubSubPojo { //converts messages so they are easy to manipulate
                 .add("message", message)
                 .add("timestamp", timestamp)
                 .add("message_id", message_id)
-                .add("upvotes", upvoted)
+                .add("upvotes", upvotes)
                 .toString();
     }
 }
