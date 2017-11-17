@@ -1,5 +1,8 @@
 package com.example.zanj.cen4020;
 
+import android.app.NotificationManager;
+import android.content.Context;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -14,9 +17,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class PubSubPnCallback extends SubscribeCallback {
     private static final String TAG = PubSubPnCallback.class.getName();
     private final PubSubListAdapter pubSubListAdapter;
+    Context context;
 
-    public PubSubPnCallback(PubSubListAdapter pubSubListAdapter) {
+    public PubSubPnCallback(PubSubListAdapter pubSubListAdapter, Context content) {
         this.pubSubListAdapter = pubSubListAdapter; //set the adapter
+        context = content;
     }
 
     @Override
@@ -41,7 +46,7 @@ public class PubSubPnCallback extends SubscribeCallback {
 
             JsonNode jsonMsg = message.getMessage();
             PubSubPojo dsMsg = JsonUtil.convert(jsonMsg, PubSubPojo.class);
-            if(!dsMsg.getMessage().equals("randomly fired on this channel"))
+            if(!dsMsg.getMessage().equals("randomly fired on this channel")) //don't want to publish the presence data
             {
                 this.pubSubListAdapter.add(dsMsg);
             }
@@ -56,7 +61,7 @@ public class PubSubPnCallback extends SubscribeCallback {
 
             JsonNode jsonMsg = res.getEntry();
             PubSubPojo dsMsg = JsonUtil.convert(jsonMsg, PubSubPojo.class);
-            if(!dsMsg.getMessage().equals("randomly fired on this channel"))
+            if(!dsMsg.getMessage().equals("randomly fired on this channel")) //don't want to publish the presence data
             {
                 this.pubSubListAdapter.add(dsMsg);
             }

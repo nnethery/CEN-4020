@@ -10,7 +10,7 @@
         <TextView
             android:id="@+id/sender"
             android:text="Remote Device UUID"
-            android:textSize="10sp"
+            android:textSize="14sp"
             android:paddingLeft="2dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
         <TextView
             android:id="@+id/timestamp"
             android:text="20160601T110000.000Z"
-            android:textSize="10sp"
+            android:textSize="14sp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:gravity="end"
@@ -29,7 +29,7 @@
     <TextView
         android:id="@+id/message"
         android:text="this is a sample real-time message from the data stream network"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:paddingTop="2dp"
         android:paddingLeft="2dp"
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
     <TextView
         android:id="@+id/upvotes"
         android:text="0 upvotes"
-        android:textSize="10sp"
+        android:textSize="14sp"
         android:paddingLeft="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

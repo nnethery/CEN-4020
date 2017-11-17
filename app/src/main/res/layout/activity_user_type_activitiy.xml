@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Are you a teacher or student?"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:paddingTop="150dp"/>
+
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:orientation="horizontal"
+        android:paddingTop="30dp"
+        android:paddingLeft="10dp">
+
+        <Button
+            android:id="@+id/teacherButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="teacherClicked"
+            android:text="Teacher"/>
+
+        <Button
+            android:id="@+id/studentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="studentClicked"
+            android:text="Student" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/selectText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you a teacher or student?"
+        android:textSize="24sp"/>
+
+</LinearLayout>
