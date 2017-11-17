@@ -40,6 +40,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +64,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+    DatabaseReference ref;
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -115,6 +121,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        ref = FirebaseDatabase.getInstance().getReference("emails");    //get an instance of the firebase database
+
     }
 
     private void login(String email, String password, final String channelName) {
@@ -129,11 +137,56 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("Auth", "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
-                                intent.putExtra("channel", channelName);
-                                intent.putExtra("type", userType);
-                                startActivity(intent);
+                                final String tempUsername;
+                                if(username.contains("."))
+                                {
+                                    tempUsername = username.replace(".", ",");
+                                }
+                                else
+                                    tempUsername = username;
+                                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    Boolean found = false;
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot data : dataSnapshot.getChildren()){
+                                            String user = String.valueOf(data.getKey());
+                                            String type = String.valueOf(data.getValue());
+                                            if(user.equals(tempUsername))
+                                            {
+                                                if(!type.equals(userType))
+                                                {
+                                                    Toast.makeText(getApplicationContext(), "User is not a " + userType + ". Changing to correct user type.",
+                                                            Toast.LENGTH_LONG).show();
+                                                    if(userType.equals("student"))
+                                                        userType = "teacher";
+                                                    else
+                                                        userType = "student";
+
+                                                }
+                                                found = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if(found == false)
+                                        {
+                                            Toast.makeText(getApplicationContext(), "User does not exist", Toast.LENGTH_LONG).show();
+                                        }
+                                        else
+                                        {
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
+                                            intent.putExtra("channel", channelName);
+                                            intent.putExtra("type", userType);
+                                            startActivity(intent);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError firebaseError) {
+
+                                    }
+                                });
 
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -161,6 +214,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         getLoaderManager().initLoader(0, null, this);
     }
+
 
     private boolean mayRequestContacts() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
