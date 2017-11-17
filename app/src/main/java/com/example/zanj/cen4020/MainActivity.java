@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
             message = ImmutableMap.<String, String>of("message_id", key, "sender", MainActivity.this.username, "message", mMessage.getText().toString(), "timestamp", timestamp, "upvotes", "null");
         }
         else {
-            message = ImmutableMap.<String, String>of("message_id", key, "sender", MainActivity.this.username, "message", mMessage.getText().toString(), "timestamp", timestamp, "upvotes", "0");
+            message = ImmutableMap.<String, String>of("message_id", key, "sender", MainActivity.this.username, "message", mMessage.getText().toString(), "timestamp", timestamp, "upvotes", "");
         }
             pubnub.publish().message(message).channel(channelName).shouldStore(true) //publish the message to the channel
                 .async(new PNCallback<PNPublishResult>() {
