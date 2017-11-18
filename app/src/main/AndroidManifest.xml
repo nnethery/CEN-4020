@@ -39,7 +39,17 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".PushMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
 
+        <service android:name=".FirebaseIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
 
         <activity android:name=".MainActivity" />
         <activity

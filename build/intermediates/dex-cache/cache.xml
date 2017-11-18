@@ -3,75 +3,120 @@
 
     <item
         is-multidex="true"
-        jar="/Users/alexistayor/.android/build-cache/aa963616b373fcbbcc287ec3fccbb56fb519d64c/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.2"
-        sha1="807751a24cf96566fd8675517c94d8463cf364db">
-        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9375d5123aad59cfe9235b3995996782332554bd/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/alexistayor/.android/build-cache/8a704f625a2860cf3585de70340cd5dd4de4fbf8/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.2"
-        sha1="287f4dec8dc2d40a238b12562b437438499cd2fb">
-        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_76aad6a69374a4969ea17fe77e58cce488ef4886/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.2"
-        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
-        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/bolts-tasks-1.4.0_b7734c905099d2295b7f9572a5df85a88c61a978/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-applinks/1.4.0/8ad21bf21784dacce5f2043afb97218cc377e835/bolts-applinks-1.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.2"
-        sha1="8ad21bf21784dacce5f2043afb97218cc377e835">
-        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/bolts-applinks-1.4.0_e13ee70210f9087cb91f286f161e0168d6e6bce9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/alexistayor/.gradle/caches/modules-2/files-2.1/com.google.zxing/core/3.3.0/73c49077166faa4c3c0059c5f583d1d7bd1475fe/core-3.3.0.jar"
-        jumboMode="false"
+        jar="/Users/Noah/.gradle/caches/modules-2/files-2.1/com.google.zxing/core/3.3.0/73c49077166faa4c3c0059c5f583d1d7bd1475fe/core-3.3.0.jar"
+        jumboMode="true"
         optimize="true"
         revision="26.0.2"
         sha1="73c49077166faa4c3c0059c5f583d1d7bd1475fe">
-        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/core-3.3.0_3a413eb74603b543b2dae2645095df77d1b62661/classes.dex" />
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/core-3.3.0_d149417ad54d009e524a5a280676a2a84fce3845/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/alexistayor/.android/build-cache/0b8bd31a6fc52531af0bf67e4ac990b132d3b8c1/output/jars/classes.jar"
-        jumboMode="false"
+        jar="/Users/Noah/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-applinks/1.4.0/8ad21bf21784dacce5f2043afb97218cc377e835/bolts-applinks-1.4.0.jar"
+        jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="ab6e491b5d7bda2f47991a30f6bfe9a8b134ff8b">
-        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_20374a67b4a5dc21e61bee299a5e77b16739d9e7/classes.dex" />
+        sha1="8ad21bf21784dacce5f2043afb97218cc377e835">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/bolts-applinks-1.4.0_625b1fc229477ee1d173b3ba254147335439a355/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/alexistayor/.android/build-cache/93d1d3f047bd33ef59b1d54ffa823041632ab4eb/output/jars/classes.jar"
-        jumboMode="false"
+        jar="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
-        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e4166f46d58081e74dc8f5099560ed6d2093a98c/classes.dex" />
+        sha1="cfc120827d312ff2d20a9c66adc8b82afbc640a8">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_7e40ac21dfe539a9224d9a7f8624296c31dfc03e/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/alexistayor/.android/build-cache/ce903f63b72e8c5a140d396bcd82b679db7d4380/output/jars/classes.jar"
-        jumboMode="false"
+        jar="/Users/Noah/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/bolts-tasks-1.4.0_c0272055f11a85247287b307b8ac8dc8ea57ecea/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/dd4fd6d181046e2d0e1fd6f72da9a8703370e28a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_74d827728914299bee31aa07c3a56fde67f1d64f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/ec71f65dd7bf2780279e4044d87c8114e90d140a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="287f4dec8dc2d40a238b12562b437438499cd2fb">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d4dc006dfbe0b4115a97baec459ff9fcc5b990a2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/32ebe984142a6791a612d56dd19cac9f17616228/output/jars/classes.jar"
+        jumboMode="true"
         optimize="true"
         revision="26.0.2"
         sha1="b8b26b28aae0ba8e2db55ad9fe0ebc770530c5ef">
-        <dex dex="/Users/alexistayor/Desktop/CEN-4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_cab328048f2525c4285cc63ddf9b256ccd42530f/classes.dex" />
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_83caba2d7a3406bcc87a7e44a0a6eb2684df6196/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/5b2827874b1d5f5157c6ba202f0d6f1641ece14a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="ab6e491b5d7bda2f47991a30f6bfe9a8b134ff8b">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2e9cfb631b2507430c8bdf88165e933380ccd60a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/07f33f730a36a6363b78366214472dd933d552b3/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="807751a24cf96566fd8675517c94d8463cf364db">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_1df72ff921428799ca66b5cf798e6acf5c01a1e4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/75958165a034c958d76dafc5be573b90dad9548e/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="73c80b05a390e8319d1ef7a236739cd610c8f774">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_14d045251f3f00432aff55464ad8f5141adfdfa8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/4a9bc36cfd7c32d85d1138d4ed5b548aad2427c2/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a546964fdc5f4275bb2ca74f09847a236b107a9a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_3b13152d7297674e6829c88565d99e74f056e230/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/a686ec74b24d22b91c793035d1ef91bb6559d961/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c2cadea4d8a1a5b5c4e5f0dc99a99a43774f5e6e">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7117504a787e3d58901cf23ce68a8f7f1bc1b2ec/classes.dex" />
     </item>
 
 </items>
