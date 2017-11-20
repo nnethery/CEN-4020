@@ -25,7 +25,7 @@
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="cfc120827d312ff2d20a9c66adc8b82afbc640a8">
+        sha1="046ab5c04c26e1e670ca267da81f1cc03606b493">
         <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_7e40ac21dfe539a9224d9a7f8624296c31dfc03e/classes.dex" />
     </item>
     <item
@@ -117,6 +117,15 @@
         revision="26.0.2"
         sha1="c2cadea4d8a1a5b5c4e5f0dc99a99a43774f5e6e">
         <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7117504a787e3d58901cf23ce68a8f7f1bc1b2ec/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Noah/.android/build-cache/b0fb44796ec984622c46ff10bb692a8c1b95b611/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="6555c483abcdcc71ef5f1d47bb1ff3fee35ef1b2">
+        <dex dex="/Users/Noah/StudioProjects/CEN4020/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f613e225a93d4303501049fdae5e216cfc1caaa3/classes.dex" />
     </item>
 
 </items>

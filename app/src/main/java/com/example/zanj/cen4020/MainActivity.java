@@ -13,12 +13,16 @@ import android.widget.Toast;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.ImmutableMap;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.callbacks.PNCallback;
@@ -56,6 +60,8 @@ public class MainActivity extends Activity {
     PubSubTabContentFragment chatFrag;                                  //fragment stores the listview of messages
     DatabaseReference ref;
     String userType;
+    private FirebaseMessaging fm;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +71,8 @@ public class MainActivity extends Activity {
         username = getIntent().getStringExtra("username");
         mPubSub = new PubSubListAdapter(this, userType);
         mPubSubPnCallback = new PubSubPnCallback(mPubSub, getApplicationContext());
+        fm = FirebaseMessaging.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         setContentView(R.layout.activity_main);
 
@@ -150,7 +158,8 @@ public class MainActivity extends Activity {
         else {
             message = ImmutableMap.<String, String>of("message_id", key, "sender", MainActivity.this.username, "message", mMessage.getText().toString(), "timestamp", timestamp, "upvotes", "");
         }
-            pubnub.publish().message(message).channel(channelName).shouldStore(true) //publish the message to the channel
+        final Map<String, String> finalMessage = message;
+        pubnub.publish().message(message).channel(channelName).shouldStore(true) //publish the message to the channel
                 .async(new PNCallback<PNPublishResult>() {
                     @Override
                     public void onResponse(PNPublishResult result, PNStatus status) {
@@ -158,6 +167,15 @@ public class MainActivity extends Activity {
                             if (!status.isError()) {
                                 mMessage.setText("");
                                 Log.v(TAG, "publish(" + JsonUtil.asJson(result) + ")");
+
+                                fm.send(new RemoteMessage.Builder("164390173589@gcm.googleapis.com")
+                                        .setMessageId(finalMessage.get("message_id"))
+                                        .addData("messageBody", finalMessage.get("message"))
+                                        .addData("channel", channelName)
+                                        .addData("sender", finalMessage.get("sender"))
+                                        .addData("firebaseUID", user.getUid())
+                                        .build());
+
                             } else {
                                 Log.v(TAG, "publishErr(" + JsonUtil.asJson(status) + ")");
                             }
