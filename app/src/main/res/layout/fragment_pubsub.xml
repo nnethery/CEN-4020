@@ -15,56 +15,64 @@
         android:textStyle="bold"
         android:textColor="#0000FF"/>
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/relativeLayout"
-        android:layout_below="@+id/message_list"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/user_name">
 
-        <EditText
+        <ListView
+            android:id="@+id/message_list"
+            android:layout_weight="8"
+            android:layout_height="0dp"
+            android:layout_width="match_parent" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/sendButton"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/new_message"
-            android:textSize="17sp"
-            android:gravity="top"
-            android:paddingRight="9dp"
-            android:paddingLeft="9dp"
-            android:paddingBottom="9dp"
-            android:paddingTop="9dp"
-            android:layout_centerVertical="true"
-            android:background="@drawable/textbox"
-            android:hint="Type message here...">
-            <requestFocus />
-        </EditText>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="9dp"
-            android:text="@string/sendbutton"
-            android:textColor="#008000"
-            android:id="@+id/sendButton"
-            android:gravity="center"
-            android:onClick="publish"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/new_message"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toLeftOf="@+id/sendButton"
+                android:background="@drawable/textbox"
+                android:gravity="top"
+                android:hint="Type message here..."
+                android:paddingBottom="9dp"
+                android:paddingLeft="9dp"
+                android:paddingRight="9dp"
+                android:paddingTop="9dp"
+                android:textSize="17sp">
 
-    <ListView
-        android:id="@+id/message_list"
-        android:layout_height="520dp"
-        android:layout_width="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/user_name" />
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/sendButton"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:onClick="publish"
+                android:text="@string/sendbutton"
+                android:textColor="#008000" />
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
 
 </RelativeLayout>
