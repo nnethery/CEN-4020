@@ -7,28 +7,39 @@
         android:layout_width="match_parent"
         android:paddingTop="5dp"
         android:paddingLeft="5dp"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:id="@+id/user_name"
         android:text="Hello, user. Channel: name1"
-        android:textSize="14sp"/>
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#0000FF"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/relativeLayout"
-        android:layout_below="@+id/user_name"
+        android:layout_below="@+id/message_list"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/sendButton"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
             android:id="@+id/new_message"
-            android:textSize="10sp"
+            android:textSize="17sp"
+            android:gravity="top"
+            android:paddingRight="9dp"
+            android:paddingLeft="9dp"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
             android:layout_centerVertical="true"
-            android:layout_alignEnd="@+id/sender"
-            android:layout_alignRight="@+id/sender">
+            android:background="@drawable/textbox"
+            android:hint="Type message here...">
             <requestFocus />
         </EditText>
 
@@ -36,9 +47,12 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="9dp"
+            android:text="@string/sendbutton"
+            android:textColor="#008000"
             android:id="@+id/sendButton"
-            android:gravity="end"
+            android:gravity="center"
             android:onClick="publish"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
@@ -47,10 +61,10 @@
 
     <ListView
         android:id="@+id/message_list"
-        android:layout_height="match_parent"
+        android:layout_height="520dp"
         android:layout_width="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/relativeLayout" />
+        android:layout_below="@+id/user_name" />
 
 </RelativeLayout>

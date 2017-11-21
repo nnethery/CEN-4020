@@ -19,4 +19,6 @@
     <string name="facebook_app_id">448603598868336</string>
     <string name="fb_login_protocol_scheme">fb448603598868336</string>
 
+    <string name="sendbutton">Send</string>
+
 </resources>
