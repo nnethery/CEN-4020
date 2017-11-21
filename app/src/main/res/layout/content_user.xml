@@ -22,6 +22,12 @@
             android:hint="Email"
             android:inputType="text" />
 
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/button_facebook_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
