@@ -103,6 +103,7 @@ public class MainActivity extends Activity {
         pubnub = new PubNub(pnConfiguration);
         initChannels(); //initialize channels and load message hirtory
         loadMessages();
+        
         mPubSub.setPubNub(pubnub);  //passing the pubnub instance to an additional class
         ref = FirebaseDatabase.getInstance().getReference("messageIDs");    //get an instance of the firebase database
         ref.addValueEventListener(new ValueEventListener() { //for firebase database, not in use currently
@@ -143,6 +144,12 @@ public class MainActivity extends Activity {
                         }
                     }
                 });
+    }
+
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        Intent i = new Intent(getApplicationContext(), UserTypeActivity.class);
+        startActivity(i);
     }
 
     public void publish(View view){ //publish method for publishing the messages to the server

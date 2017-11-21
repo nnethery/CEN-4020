@@ -41,8 +41,23 @@
             android:gravity="end"
             android:onClick="publish"
             android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/logoutButton"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <Button
+            android:id="@+id/logoutButton"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="61dp"
+            android:layout_marginRight="61dp"
+            android:gravity="end"
+            android:onClick="logout"
+            android:text="Logout" />
     </RelativeLayout>
 
     <ListView

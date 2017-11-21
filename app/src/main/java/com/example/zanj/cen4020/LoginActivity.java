@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private CallbackManager mCallbackManager;
+    private String fbemail;
     String userType;
     String TAG = "Facebook:";
 
@@ -128,8 +129,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //attemptLogin();
-                login(mEmailView.getText().toString(), mPasswordView.getText().toString(), mChannelName.getText().toString());
+                if (!mEmailView.isEnabled() && !mPasswordView.isEnabled())
+                    login(fbemail, null, mChannelName.getText().toString());
+                else
+                    login(mEmailView.getText().toString(), mPasswordView.getText().toString(), mChannelName.getText().toString());
             }
         });
 
@@ -165,84 +168,131 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private void login(String email, String password, final String channelName) {
         final String username = email.split("@")[0];
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if(!channelName.contains(".")) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d("Auth", "signInWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                final String tempUsername;
-                                if(username.contains("."))
-                                {
-                                    tempUsername = username.replace(".", ",");
-                                }
-                                else
-                                    tempUsername = username;
-                                ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    Boolean found = false;
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        for (DataSnapshot data : dataSnapshot.getChildren()){
-                                            String user = String.valueOf(data.getKey());
-                                            String type = String.valueOf(data.getValue());
-                                            if(user.equals(tempUsername))
-                                            {
-                                                if(!type.equals(userType))
-                                                {
-                                                    Toast.makeText(getApplicationContext(), "User is not a " + userType + ". Changing to correct user type.",
-                                                            Toast.LENGTH_LONG).show();
-                                                    if(userType.equals("student"))
-                                                        userType = "teacher";
-                                                    else
-                                                        userType = "student";
+        if (password != null) {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
 
+                            if (!channelName.contains(".")) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d("Auth", "signInWithEmail:success");
+                                    final String tempUsername;
+                                    if (username.contains(".")) {
+                                        tempUsername = username.replace(".", ",");
+                                    } else
+                                        tempUsername = username;
+                                    ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        Boolean found = false;
+
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                                String user = String.valueOf(data.getKey());
+                                                String type = String.valueOf(data.getValue());
+                                                if (user.equals(tempUsername)) {
+                                                    if (!type.equals(userType)) {
+                                                        Toast.makeText(getApplicationContext(), "User is not a " + userType + ". Changing to correct user type.",
+                                                                Toast.LENGTH_LONG).show();
+                                                        if (userType.equals("student"))
+                                                            userType = "teacher";
+                                                        else
+                                                            userType = "student";
+
+                                                    }
+                                                    found = true;
+                                                    break;
                                                 }
-                                                found = true;
-                                                break;
+                                            }
+
+                                            if (found == false) {
+                                                Toast.makeText(getApplicationContext(), "User does not exist", Toast.LENGTH_LONG).show();
+                                            } else {
+                                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
+                                                intent.putExtra("channel", channelName);
+                                                intent.putExtra("type", userType);
+                                                startActivity(intent);
                                             }
                                         }
 
-                                        if(found == false)
-                                        {
-                                            Toast.makeText(getApplicationContext(), "User does not exist", Toast.LENGTH_LONG).show();
+                                        @Override
+                                        public void onCancelled(DatabaseError firebaseError) {
+
                                         }
-                                        else
-                                        {
-                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                            intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
-                                            intent.putExtra("channel", channelName);
-                                            intent.putExtra("type", userType);
-                                            startActivity(intent);
-                                        }
-                                    }
+                                    });
 
-                                    @Override
-                                    public void onCancelled(DatabaseError firebaseError) {
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w("Auth", "signInWithEmail:failure", task.getException());
+                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
 
-                                    }
-                                });
-
+                                }
+                                // ...
                             } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w("Auth", "signInWithEmail:failure", task.getException());
-                                Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                Toast.makeText(LoginActivity.this, "Invalid Channel Name. Channel Name cannot contain \".\"",
                                         Toast.LENGTH_SHORT).show();
-
                             }
-                            // ...
                         }
-                        else{
-                            Toast.makeText(LoginActivity.this, "Invalid Channel Name. Channel Name cannot contain \".\"",
-                                    Toast.LENGTH_SHORT).show();
+                    });
+        }
+        else {
+            if (!channelName.contains(".")) {
+                final String tempUsername;
+                if (username.contains(".")) {
+                    tempUsername = username.replace(".", ",");
+                } else
+                    tempUsername = username;
+
+
+                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    Boolean found = false;
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            String user = String.valueOf(data.getKey());
+                            String type = String.valueOf(data.getValue());
+                            if (user.equals(tempUsername)) {
+                                if (!type.equals(userType)) {
+                                    Toast.makeText(getApplicationContext(), "User is not a " + userType + ". Changing to correct user type.",
+                                            Toast.LENGTH_LONG).show();
+                                    if (userType.equals("student"))
+                                        userType = "teacher";
+                                    else
+                                        userType = "student";
+
+                                }
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (found == false) {
+                            Toast.makeText(getApplicationContext(), "User does not exist", Toast.LENGTH_LONG).show();
+                        } else {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
+                            intent.putExtra("channel", channelName);
+                            intent.putExtra("type", userType);
+                            startActivity(intent);
                         }
                     }
-                });
-    }
 
+                    @Override
+                    public void onCancelled(DatabaseError firebaseError) {
+
+                    }
+                });
+            } else {
+                Toast.makeText(LoginActivity.this, "Invalid Channel Name. Channel Name cannot contain \".\"",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
 
     private void populateAutoComplete() {
@@ -539,10 +589,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(LoginActivity.this, "Works",
-                                    Toast.LENGTH_LONG).show();
-                            //updateUI(user);
+                            mEmailView.setFocusable(false);
+                            mEmailView.setEnabled(false);
+                            mPasswordView.setFocusable(false);
+                            mPasswordView.setEnabled(false);
+
+                            fbemail = mAuth.getCurrentUser().getEmail();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -554,6 +606,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         // ...
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Pass the activity result back to the Facebook SDK
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }
 
