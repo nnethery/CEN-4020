@@ -8,12 +8,22 @@
         android:paddingTop="5dp"
         android:paddingLeft="5dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/logoutButton"
         android:gravity="center"
         android:id="@+id/user_name"
         android:text="Hello, user. Channel: name1"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#0000FF"/>
+
+    <Button
+        android:id="@+id/logoutButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="logout"
+        android:text="Logout" />
 
     <LinearLayout
         android:orientation="vertical"
