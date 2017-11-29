@@ -2,28 +2,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/tempLayout"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/logoutButton"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="logout"
+            android:text="Logout"
+            android:layout_alignParentLeft="true"/>
+
+        <Button
+            android:id="@+id/sessionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Session"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:paddingTop="5dp"
         android:paddingLeft="5dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logoutButton"
+        android:layout_below="@+id/tempLayout"
         android:gravity="center"
         android:id="@+id/user_name"
         android:text="Hello, user. Channel: name1"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#0000FF"/>
-
-    <Button
-        android:id="@+id/logoutButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:onClick="logout"
-        android:text="Logout" />
 
     <LinearLayout
         android:orientation="vertical"

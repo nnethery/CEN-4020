@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -58,7 +59,7 @@ public class MainActivity extends Activity {
     private PubSubListAdapter mPubSub;                                  //adapter that contains the list of messages
     public List<String> PUBSUB_CHANNEL;
     PubSubTabContentFragment chatFrag;                                  //fragment stores the listview of messages
-    DatabaseReference ref;
+    DatabaseReference ref, ref2;
     String userType;
     private FirebaseMessaging fm;
     private FirebaseUser user;
@@ -85,6 +86,8 @@ public class MainActivity extends Activity {
         fragmentTransaction.commit();
 
         chatFrag.setAdapter(mPubSub);                                           //add the adapter to the fragment
+
+        chatFrag.setUserType(userType, channelName);
         if(channelName.contains("."))
         {
             String originalMessage = getIntent().getStringExtra("originalMessage");
@@ -110,6 +113,7 @@ public class MainActivity extends Activity {
         
         mPubSub.setPubNub(pubnub);  //passing the pubnub instance to an additional class
         ref = FirebaseDatabase.getInstance().getReference("messageIDs");    //get an instance of the firebase database
+        ref2 = FirebaseDatabase.getInstance().getReference("channels");
         ref.addValueEventListener(new ValueEventListener() { //for firebase database, not in use currently
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -126,6 +130,13 @@ public class MainActivity extends Activity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(userType.equals("teacher"))
+            ref2.child(channelName).setValue("inactive"); //always deactivate channel when teacher leaves
     }
 
     private final void initChannels()
@@ -156,7 +167,43 @@ public class MainActivity extends Activity {
         startActivity(i);
     }
 
+
     public void publish(View view){ //publish method for publishing the messages to the server
+        if(channelName.contains("."))
+        {
+            executePublish();
+        }
+        ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data : dataSnapshot.getChildren())
+                {
+                    String sessionChannel = String.valueOf(data.getKey());
+                    String channelStatus = String.valueOf(data.getValue());
+                    if(sessionChannel.equals(channelName))
+                    {
+                        if(channelStatus.equals("active")) {
+                            executePublish();
+                            break;
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this, "Teacher has not started the session.", Toast.LENGTH_LONG).show();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void executePublish()
+    {
         final EditText mMessage = (EditText) MainActivity.this.findViewById(R.id.new_message);
         final String timestamp = DateTimeUtil.getTimeStampUtc();
         final String key = ref.push().getKey(); //get a unique hashed key for this message and add to firebase, necessary for message ids and threads
@@ -172,29 +219,29 @@ public class MainActivity extends Activity {
         final Map<String, String> finalMessage = message;
         pubnub.publish().message(message).channel(channelName).shouldStore(true) //publish the message to the channel
                 .async(new PNCallback<PNPublishResult>() {
-                    @Override
-                    public void onResponse(PNPublishResult result, PNStatus status) {
-                        try {
-                            if (!status.isError()) {
-                                mMessage.setText("");
-                                Log.v(TAG, "publish(" + JsonUtil.asJson(result) + ")");
+                           @Override
+                           public void onResponse(PNPublishResult result, PNStatus status) {
+                               try {
+                                   if (!status.isError()) {
+                                       mMessage.setText("");
+                                       Log.v(TAG, "publish(" + JsonUtil.asJson(result) + ")");
 
-                                fm.send(new RemoteMessage.Builder("164390173589@gcm.googleapis.com")
-                                        .setMessageId(finalMessage.get("message_id"))
-                                        .addData("messageBody", finalMessage.get("message"))
-                                        .addData("channel", channelName)
-                                        .addData("sender", finalMessage.get("sender"))
-                                        .addData("firebaseUID", user.getUid())
-                                        .build());
+                                       fm.send(new RemoteMessage.Builder("164390173589@gcm.googleapis.com")
+                                               .setMessageId(finalMessage.get("message_id"))
+                                               .addData("messageBody", finalMessage.get("message"))
+                                               .addData("channel", channelName)
+                                               .addData("sender", finalMessage.get("sender"))
+                                               .addData("firebaseUID", user.getUid())
+                                               .build());
 
-                            } else {
-                                Log.v(TAG, "publishErr(" + JsonUtil.asJson(status) + ")");
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-        );
+                                   } else {
+                                       Log.v(TAG, "publishErr(" + JsonUtil.asJson(status) + ")");
+                                   }
+                               } catch (Exception e) {
+                                   e.printStackTrace();
+                               }
+                           }
+                       }
+                );
     }
 }
