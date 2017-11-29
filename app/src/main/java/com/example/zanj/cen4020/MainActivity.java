@@ -91,8 +91,12 @@ public class MainActivity extends Activity {
             String originalSender = getIntent().getStringExtra("originalSender");
             chatFrag.setUserAndChannel("Hello: " + username + ", Replying to " + originalSender + "'s message: " + originalMessage);
         }
-        else
-            chatFrag.setUserAndChannel("Hello: " + username + ", Channel: " + channelName);
+        else {
+            if(userType.equals("teacher"))
+                chatFrag.setUserAndChannel("Hello: Instructor"  + ", Channel: " + channelName);
+            else
+                chatFrag.setUserAndChannel("Hello: "+ username  + ", Channel: " + channelName);
+        }
         PUBSUB_CHANNEL = Arrays.asList(channelName);
         mPubSub.setUserAndChannel(username, channelName);                       //setting the user and the channel
         PNConfiguration pnConfiguration = new PNConfiguration();                //create a config

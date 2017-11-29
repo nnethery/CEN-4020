@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -54,11 +55,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Handler;
 
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.R.attr.phoneNumber;
@@ -74,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
-    DatabaseReference ref;
+    DatabaseReference ref, ref2;
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -98,6 +101,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private String fbemail;
     String userType;
     String TAG = "Facebook:";
+    String tempChannel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +129,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        tempChannel = getIntent().getStringExtra("channelTemp");
+        if(tempChannel != null)
+        {
+            mChannelName.setText(tempChannel);
+        }
+        else
+            tempChannel = "none";
+
         Button mEmailSignInButton = (Button) findViewById(R.id.sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -139,7 +151,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         ref = FirebaseDatabase.getInstance().getReference("emails");    //get an instance of the firebase database
-
+        ref2 = FirebaseDatabase.getInstance().getReference("channels");
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = findViewById(R.id.button_facebook_login);
         loginButton.setReadPermissions("email", "public_profile");
@@ -210,11 +222,61 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                             if (found == false) {
                                                 Toast.makeText(getApplicationContext(), "User does not exist", Toast.LENGTH_LONG).show();
                                             } else {
-                                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                                intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
-                                                intent.putExtra("channel", channelName);
-                                                intent.putExtra("type", userType);
-                                                startActivity(intent);
+                                                if(userType.equals("student"))
+                                                {
+                                                    ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                                            boolean found = false;
+                                                            for (DataSnapshot data2 : dataSnapshot.getChildren())
+                                                            {
+                                                                String tempChannel = String.valueOf(data2.getKey());
+                                                                if(tempChannel.equals(channelName))
+                                                                {
+                                                                    found = true; //teacher has already created the channel
+                                                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                                    intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
+                                                                    intent.putExtra("channel", channelName);
+                                                                    intent.putExtra("type", userType);
+                                                                    startActivity(intent);
+                                                                }
+                                                            }
+
+                                                            if(found == false)
+                                                            {
+                                                                Toast.makeText(getApplicationContext(), "Teacher has not created channel yet.", Toast.LENGTH_LONG).show();
+                                                                mEmailView.setText("");
+                                                                mPasswordView.setText("");
+                                                                mChannelName.setText("");
+                                                                CountDownTimer timer = new CountDownTimer(5000, 5000)
+                                                                {
+                                                                    public void onTick(long millisUntilFinished)
+                                                                    {
+                                                                    }
+
+                                                                    public void onFinish()
+                                                                    {
+                                                                        restartActivity();
+                                                                    }
+                                                                };
+                                                                timer.start();
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(DatabaseError databaseError) {
+
+                                                        }
+                                                    });
+                                                }
+                                                else { //if teacher
+
+                                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                    intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
+                                                    intent.putExtra("channel", channelName);
+                                                    intent.putExtra("type", userType);
+                                                    startActivity(intent);
+                                                }
                                             }
                                         }
 
@@ -301,6 +363,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         getLoaderManager().initLoader(0, null, this);
+    }
+
+
+    void restartActivity()
+    {
+        finish();
+        startActivity(getIntent());     //restart activity
     }
 
 
@@ -575,6 +644,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     {
         Intent intent = new Intent(this, UserActivity.class);
         intent.putExtra("type", userType);
+        intent.putExtra("tempChannel", tempChannel);
         startActivity(intent);
     }
 

@@ -2,6 +2,7 @@ package com.example.zanj.cen4020;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -45,8 +46,9 @@ public class UserActivity extends AppCompatActivity {
     private static final String TAG = UserActivity.class.getName();
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
-    DatabaseReference ref;
+    DatabaseReference ref, ref2;
     private String fbemail;
+    String tempChannel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +58,15 @@ public class UserActivity extends AppCompatActivity {
         passwordET = findViewById(R.id.etPassword);
         channelET = findViewById(R.id.etChannelname);
         ref = FirebaseDatabase.getInstance().getReference("emails");    //get an instance of the firebase database
-
+        ref2 = FirebaseDatabase.getInstance().getReference("channels");   //get instance of firebase for channels
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = findViewById(R.id.button_facebook_login);
         loginButton.setReadPermissions("email", "public_profile");
+        tempChannel = getIntent().getStringExtra("tempChannel");
+        if(!tempChannel.equals("none"))
+            channelET.setText(tempChannel);
 
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -92,67 +97,59 @@ public class UserActivity extends AppCompatActivity {
             password = passwordET.getText().toString(); //get password
             username = emailET.getText().toString().split("@")[0]; //get just the username
             channel = channelET.getText().toString(); //get channel name
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
-                                final String tempUsername;
-                                if (username.contains(".")) {
-                                    tempUsername = username.replace(".", ",");
-                                } else
-                                    tempUsername = username;
-                                ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    Boolean found = false;
-
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                            String user = String.valueOf(data.getKey());
-                                            if (user.equals(tempUsername)) {
-                                                Toast.makeText(getApplicationContext(), "Username is already taken.", Toast.LENGTH_LONG).show();
-                                                emailET.setText("");
-                                                passwordET.setText("");
-                                                channelET.setText("");
-                                                found = true;
-                                                FirebaseUser firebaseAccount = mAuth.getCurrentUser();
-                                                firebaseAccount.delete()
-                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                if (task.isSuccessful()) {
-                                                                    Log.d(TAG, "User account deleted.");
-                                                                }
-                                                            }
-                                                        });
-                                                break;
-                                            }
-                                        }
-
-                                        if (found == false) {
-                                            ref.child(tempUsername).setValue(userType);
-                                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                                            intent.putExtra("username", username); //passes username and channel to the MainActivity class
-                                            intent.putExtra("channel", channel);
-                                            intent.putExtra("type", userType);
-                                            startActivity(intent);
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError firebaseError) {
-
-                                    }
-                                });
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+            if(userType.equals("student"))
+            {
+                ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        boolean found = false;
+                        for (DataSnapshot data2 : dataSnapshot.getChildren())
+                        {
+                            String tempChannel = String.valueOf(data2.getKey());
+                            if(tempChannel.equals(channel))
+                            {
+                                found = true; //teacher has already created the channel
+                                break;
                             }
                         }
-                    });
-        } else {
+
+                        if(found == false)
+                        {
+                            Toast.makeText(getApplicationContext(), "Teacher has not created channel yet.", Toast.LENGTH_LONG).show();
+                            emailET.setText("");
+                            passwordET.setText("");
+                            channelET.setText("");
+                            CountDownTimer timer = new CountDownTimer(5000, 5000)
+                            {
+                                public void onTick(long millisUntilFinished)
+                                {
+                                }
+
+                                public void onFinish()
+                                {
+                                    restartActivity();
+                                }
+                            };
+                            timer.start();
+                        }
+                        else //found channel so register user
+                        {
+                            firebaseRegister(userType);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+            else //register as teacher
+            {
+                firebaseRegister(userType);
+            }
+        }
+        else { //for facebook login
             final String tempUsername;
             if (fbemail.contains(".")) {
                 tempUsername = fbemail.replace(".", ",");
@@ -166,6 +163,76 @@ public class UserActivity extends AppCompatActivity {
             intent.putExtra("type", userType);
             startActivity(intent);
         }
+    }
+
+    void firebaseRegister(final String userType)
+    {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            final String tempUsername;
+                            if (username.contains(".")) {
+                                tempUsername = username.replace(".", ",");
+                            } else
+                                tempUsername = username;
+                            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                Boolean found = false;
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                        String user = String.valueOf(data.getKey());
+                                        if (user.equals(tempUsername)) {
+                                            Toast.makeText(getApplicationContext(), "Username is already taken.", Toast.LENGTH_LONG).show();
+                                            emailET.setText("");
+                                            passwordET.setText("");
+                                            channelET.setText("");
+                                            found = true;
+                                            FirebaseUser firebaseAccount = mAuth.getCurrentUser();
+                                            firebaseAccount.delete()
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                Log.d(TAG, "User account deleted.");
+                                                            }
+                                                        }
+                                                    });
+                                            break;
+                                        }
+                                    }
+
+                                    if (found == false) {
+                                        ref.child(tempUsername).setValue(userType);
+                                        final Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                                        intent.putExtra("username", username); //passes username and channel to the MainActivity class
+                                        intent.putExtra("channel", channel);
+                                        intent.putExtra("type", userType);
+                                        startActivity(intent);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError firebaseError) {
+
+                                }
+                            });
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        }
+                    }
+                });
+    }
+
+    void restartActivity()
+    {
+        finish();
+        startActivity(getIntent());     //restart activity
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
