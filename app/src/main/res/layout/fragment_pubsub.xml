@@ -67,7 +67,6 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toLeftOf="@+id/sendButton"
-                android:background="@drawable/textbox"
                 android:gravity="top"
                 android:hint="Type message here..."
                 android:paddingBottom="9dp"
