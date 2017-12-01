@@ -99,50 +99,7 @@ public class UserActivity extends AppCompatActivity {
             channel = channelET.getText().toString(); //get channel name
             if(userType.equals("student"))
             {
-                ref2.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        boolean found = false;
-                        for (DataSnapshot data2 : dataSnapshot.getChildren())
-                        {
-                            String tempChannel = String.valueOf(data2.getKey());
-                            if(tempChannel.equals(channel))
-                            {
-                                found = true; //teacher has already created the channel
-                                break;
-                            }
-                        }
-
-                        if(found == false)
-                        {
-                            Toast.makeText(getApplicationContext(), "Teacher has not created channel yet.", Toast.LENGTH_LONG).show();
-                            emailET.setText("");
-                            passwordET.setText("");
-                            channelET.setText("");
-                            CountDownTimer timer = new CountDownTimer(5000, 5000)
-                            {
-                                public void onTick(long millisUntilFinished)
-                                {
-                                }
-
-                                public void onFinish()
-                                {
-                                    restartActivity();
-                                }
-                            };
-                            timer.start();
-                        }
-                        else //found channel so register user
-                        {
-                            firebaseRegister(userType);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+                checkChannelExists(userType, false);
             }
             else //register as teacher
             {
@@ -156,13 +113,80 @@ public class UserActivity extends AppCompatActivity {
             } else
                 tempUsername = fbemail;
 
-            ref.child(tempUsername).setValue(userType);
-            Intent intent = new Intent(getBaseContext(), MainActivity.class);
-            intent.putExtra("username", fbemail); //passes username and channel to the MainActivity class
-            intent.putExtra("channel", channelET.getText().toString());
-            intent.putExtra("type", userType);
-            startActivity(intent);
+            if(userType.equals("student"))
+                checkChannelExists(userType, true);
+            else {
+                ref.child(tempUsername).setValue(userType);
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                intent.putExtra("username", fbemail); //passes username and channel to the MainActivity class
+                intent.putExtra("channel", channel);
+                intent.putExtra("type", userType);
+                startActivity(intent);
+            }
         }
+    }
+
+
+    private void checkChannelExists(final String userType, final boolean whichRegister)
+    {
+        ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean found = false;
+                for (DataSnapshot data2 : dataSnapshot.getChildren())
+                {
+                    String tempChannel = String.valueOf(data2.getKey());
+                    if(tempChannel.equals(channel))
+                    {
+                        found = true; //teacher has already created the channel
+                        break;
+                    }
+                }
+
+                if(found == false)
+                {
+                    Toast.makeText(getApplicationContext(), "Teacher has not created channel yet.", Toast.LENGTH_LONG).show();
+                    emailET.setText("");
+                    passwordET.setText("");
+                    channelET.setText("");
+                    CountDownTimer timer = new CountDownTimer(5000, 5000)
+                    {
+                        public void onTick(long millisUntilFinished)
+                        {
+                        }
+
+                        public void onFinish()
+                        {
+                            restartActivity();
+                        }
+                    };
+                    timer.start();
+                }
+                else //found channel so register user
+                {
+                    if(whichRegister == false) //not facebook login, need to use firebase authentication for this
+                        firebaseRegister(userType);
+                    else{ //for facebook login, dont use firebase authentication for this
+                        final String tempUsername;
+                        if (fbemail.contains(".")) {
+                            tempUsername = fbemail.replace(".", ",");
+                        } else
+                            tempUsername = fbemail;
+                        ref.child(tempUsername).setValue(userType);
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        intent.putExtra("username", fbemail); //passes username and channel to the MainActivity class
+                        intent.putExtra("channel", channel);
+                        intent.putExtra("type", userType);
+                        startActivity(intent);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     void firebaseRegister(final String userType)

@@ -186,7 +186,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-
                             if (!channelName.contains(".")) {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
@@ -224,50 +223,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                             } else {
                                                 if(userType.equals("student"))
                                                 {
-                                                    ref2.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(DataSnapshot dataSnapshot) {
-                                                            boolean found = false;
-                                                            for (DataSnapshot data2 : dataSnapshot.getChildren())
-                                                            {
-                                                                String tempChannel = String.valueOf(data2.getKey());
-                                                                if(tempChannel.equals(channelName))
-                                                                {
-                                                                    found = true; //teacher has already created the channel
-                                                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                                                    intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
-                                                                    intent.putExtra("channel", channelName);
-                                                                    intent.putExtra("type", userType);
-                                                                    startActivity(intent);
-                                                                }
-                                                            }
-
-                                                            if(found == false)
-                                                            {
-                                                                Toast.makeText(getApplicationContext(), "Teacher has not created channel yet.", Toast.LENGTH_LONG).show();
-                                                                mEmailView.setText("");
-                                                                mPasswordView.setText("");
-                                                                mChannelName.setText("");
-                                                                CountDownTimer timer = new CountDownTimer(5000, 5000)
-                                                                {
-                                                                    public void onTick(long millisUntilFinished)
-                                                                    {
-                                                                    }
-
-                                                                    public void onFinish()
-                                                                    {
-                                                                        restartActivity();
-                                                                    }
-                                                                };
-                                                                timer.start();
-                                                            }
-                                                        }
-
-                                                        @Override
-                                                        public void onCancelled(DatabaseError databaseError) {
-
-                                                        }
-                                                    });
+                                                    checkChannelExists(channelName, username); //make sure channel exists before student logs in
                                                 }
                                                 else { //if teacher
 
@@ -336,11 +292,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         if (found == false) {
                             Toast.makeText(getApplicationContext(), "User does not exist", Toast.LENGTH_LONG).show();
                         } else {
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
-                            intent.putExtra("channel", channelName);
-                            intent.putExtra("type", userType);
-                            startActivity(intent);
+                            if(userType.equals("student"))
+                            {
+                                checkChannelExists(channelName, username); //make sure channel exists before student logs in
+                            }
+                            else { //if teacher
+
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
+                                intent.putExtra("channel", channelName);
+                                intent.putExtra("type", userType);
+                                startActivity(intent);
+                            }
                         }
                     }
 
@@ -356,6 +319,53 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    private void checkChannelExists(final String channelName, final String username)
+    {
+        ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean found = false;
+                for (DataSnapshot data2 : dataSnapshot.getChildren())
+                {
+                    String tempChannel = String.valueOf(data2.getKey());
+                    if(tempChannel.equals(channelName))
+                    {
+                        found = true; //teacher has already created the channel
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("username", username); //pass the username and channel name to the mainactivity class
+                        intent.putExtra("channel", channelName);
+                        intent.putExtra("type", userType);
+                        startActivity(intent);
+                    }
+                }
+
+                if(found == false)
+                {
+                    Toast.makeText(getApplicationContext(), "Teacher has not created channel yet.", Toast.LENGTH_LONG).show();
+                    mEmailView.setText("");
+                    mPasswordView.setText("");
+                    mChannelName.setText("");
+                    CountDownTimer timer = new CountDownTimer(5000, 5000)
+                    {
+                        public void onTick(long millisUntilFinished)
+                        {
+                        }
+
+                        public void onFinish()
+                        {
+                            restartActivity();
+                        }
+                    };
+                    timer.start();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
