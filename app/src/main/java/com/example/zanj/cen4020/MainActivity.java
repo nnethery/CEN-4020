@@ -1,5 +1,7 @@
 package com.example.zanj.cen4020;
 
+import android.os.AsyncTask;
+import android.os.Looper;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -36,6 +38,15 @@ import com.pubnub.api.models.consumer.history.PNHistoryResult;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 import android.content.Intent;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import com.example.zanj.cen4020.PubSubListAdapter;
 import com.example.zanj.cen4020.PubSubPnCallback;
@@ -169,36 +180,72 @@ public class MainActivity extends Activity {
 
 
     public void publish(View view){ //publish method for publishing the messages to the server
-        if(channelName.contains("."))
+        final EditText mMessage = (EditText) MainActivity.this.findViewById(R.id.new_message);
+        String mes = mMessage.getText().toString();
+
+      /*  Toast.makeText(MainActivity.this, "|"+mes+"|", Toast.LENGTH_LONG).show();
+
+        try
         {
-            executePublish();
-        }
-        ref2.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot data : dataSnapshot.getChildren())
+                if (ContainsSwears(mes))
                 {
-                    String sessionChannel = String.valueOf(data.getKey());
-                    String channelStatus = String.valueOf(data.getValue());
-                    if(sessionChannel.equals(channelName))
-                    {
-                        if(channelStatus.equals("active")) {
-                            executePublish();
-                            break;
-                        }
-                        else {
-                            Toast.makeText(MainActivity.this, "Teacher has not started the session.", Toast.LENGTH_LONG).show();
-                            break;
+                    return;
+                }
+        }
+        catch (IOException ie)
+        {
+                return;
+        }*/
+
+      HTTPTask ht = new HTTPTask();
+      ht.execute();
+
+      while(true)
+      {
+          if(ht.done)
+              break;
+      }
+
+      final Boolean swear = ht.swear;
+
+      ht.cancel(true);
+
+            if (channelName.contains(".") && !swear) {
+                executePublish();
+            }
+            else if(channelName.contains("."))
+            {
+               Toast.makeText(MainActivity.this, "Message Contains Profanity", Toast.LENGTH_LONG).show();
+            }
+
+            ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        String sessionChannel = String.valueOf(data.getKey());
+                        String channelStatus = String.valueOf(data.getValue());
+                        if (sessionChannel.equals(channelName)) {
+                            if (channelStatus.equals("active") && !swear) {
+                                executePublish();
+                                break;
+                            }
+                            else if(swear) {
+                                Toast.makeText(MainActivity.this, "Message Contains Profanity", Toast.LENGTH_LONG).show();
+                                break;
+                            }
+                            else {
+                                Toast.makeText(MainActivity.this, "Teacher has not started the session.", Toast.LENGTH_LONG).show();
+                                break;
+                            }
                         }
                     }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
 
     }
 
@@ -244,4 +291,101 @@ public class MainActivity extends Activity {
                        }
                 );
     }
+/*
+    public Boolean ContainsSwears(String mes) throws IOException
+    {
+        StringBuilder sb = new StringBuilder();
+        String output;
+        String uri = "http://www.purgomalum.com/service/containsprofanity?text=\"" + mes + "\"";
+        URL url = new URL(uri);
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        try {
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+
+            output = bin.readLine();
+        }
+        finally {
+            urlConnection.disconnect();
+        }
+            if(output.equals("true"))
+            {
+                Toast.makeText(MainActivity.this, "Message Contains Profanity", Toast.LENGTH_LONG).show();
+                return true;
+            }
+            else if(output.equals("false"))
+                return false;
+            else
+            {
+                Toast.makeText(MainActivity.this, "Failure to Send Message", Toast.LENGTH_LONG).show();
+                return true;
+            }
+
+    }*/
+
+
+    private class HTTPTask extends AsyncTask<Void, Void, Void>
+    {
+        Boolean done = false;
+        Boolean swear = false;
+        String result;
+        final EditText mMessage = (EditText) MainActivity.this.findViewById(R.id.new_message);
+        String mes = mMessage.getText().toString();
+        String source = "http://www.purgomalum.com/service/containsprofanity?text=\"" + mes + "\"";
+        @Override
+        protected Void doInBackground(Void... params){
+            URL textUrl;
+
+            try {
+                textUrl = new URL(source);
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(textUrl.openStream()));
+                String stringbuffer;
+                String stringText = "";
+
+                while((stringbuffer = bufferedReader.readLine())!=null)
+                    stringText += stringbuffer;
+
+                bufferedReader.close();;
+                result = stringText;
+            }
+            catch (MalformedURLException e){
+                done = true;
+                e.printStackTrace();
+            }
+            catch(IOException e){
+                done = true;
+                e.printStackTrace();
+            }
+
+            if(result.equals("true")) {
+                swear = true;
+            }
+            else if(result.equals("false"))
+                swear = false;
+            else {
+                swear = true;
+            }
+            done = true;
+
+            return null;
+        }
+        /*
+        @Override
+        protected void onPostExecute(Void res){
+            if(result.equals("true")) {
+                Toast.makeText(MainActivity.this, "Message Contains Profanity", Toast.LENGTH_LONG).show();
+                swear = true;
+            }
+            else if(result.equals("false"))
+                swear = false;
+            else {
+                Toast.makeText(MainActivity.this, "Failure to Send Message", Toast.LENGTH_LONG).show();
+                swear = true;
+            }
+            done = true;
+            super.onPostExecute(res);
+        }*/
+
+    }
+
 }
