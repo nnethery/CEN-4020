@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\27.0.1\287742f1c6cea6d9126670e9f031890b0462362a\support-annotations-27.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="287742f1c6cea6d9126670e9f031890b0462362a">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-27.0.1_551a089f9beef9c4bc05a1d1317dbbdf0c3ec790\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\64f9c34a1b97ec4a9add18727ed82e2f3d390620\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f8a80c9882b064f2943e10649a8d2b249f5bf176">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ac5ede3ea868627c889f55f483c2b14c753648bc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\7dd308445c28b1091b721e72f154bf7e45b125fa\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b8b26b28aae0ba8e2db55ad9fe0ebc770530c5ef">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_aca93e2a5a030d9bd2642b0ac129c618e4b8e217\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\f9ad107108fc8cc875f7fb2351bc57a500507abf\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d928394035bd4f7d2ee9e1c63d45f9ec088e21a4">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_18d9e61be467b6d0a38bae3c95f8f0bcd5704c46\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\142656749e6f9cbbaec97b8198f0df8b47be7e5f\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="cbbd26dd2f6d46181b41a5f6f5e34889442a811b">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5e95c41cc5aa7fbad52fed3d7fea3dd15ea93e18\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\1245032158ba23963340a99fac7b73c04ac17795\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="91dae39a5cc837ad2a829c0dc69c57ab8d69d22b">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_41cae193c19e22ab8a6d180376afb417eb3ae0c5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\0396dc8dab0bfcf7f48c29dc61c142532c64aa3a\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="925879273e627f34059466359ba6789cf61889e2">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e0e5b427b3cfe3563653e6f7ef56c04e459f3bef\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\8d3273b9863061ba24a7f10ab163cd63b6573eb7\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="ac5e6ae168ef77f0b0b1e3245d7afd7d32f710c3">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4983d9ebcb3fe9a4d94bd19b259aaaa0efe75e0a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\d01d35bb02c8ae62cfc912b27e324d8962e05cba\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f10fed27d6d0b4aae675f17b33c639b4d5a0ed93">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d1b42d29163b4946a8c4786e6e9c19d3ccdf8337\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\7871ec5087b909422555e854b69dbfb3d71cc873\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="69f7591c9ff9238ff226e264c0260bb9f1ce0029">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d494be228dab6b55451a63b9ae22a1ed471bd232\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\b8f43df6085ecaf452bf7181237a3c0c39a69894\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f95788f0e923006a2da51733d4cbd5c08aad299c">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ed01345df5dc544ca698b0604fdbc0184191718c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\bc3362efd006407c44a87c3dba82e2c42b115331\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d4f9ace23785adf79a174d569bde261f032e1190">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_03be94161acb11dc72a0efabd8b2339b3ee4c81d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\515f7b4373b9d915c9cf210fb6ff79ada94a08c3\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="dc98b63d89490102b0a38423e24dce190354795b">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c5ad336245f7b8b16df11972580d24e52f51d45e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\2cbfd64439ccf3ac7554dd8f20a085f601c2a9ea\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="59cbbfb2937ebed98c8bb8882b7112d16358014e">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ec409b16286b4a84c8ce41e3d464ec5ee380e67e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Jack\.android\build-cache\498bbd2e463da583f720591b8d169b8773eb1cc1\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="7ca71e38c643e51083ab3a07f3a056bfb066caec">
+        <dex dex="C:\Users\Jack\AndroidStudioProjects\CEN-4020\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_cac40224c63aa6f9e6c6db4dd7a8adffc89ead0c\classes.dex" />
+    </item>
+
+</items>

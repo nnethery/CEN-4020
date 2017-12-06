@@ -14,10 +14,12 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_user">UserActivity</string>
+    <string name="title_activity_user">Class Chat</string>
 
     <string name="facebook_app_id">448603598868336</string>
     <string name="fb_login_protocol_scheme">fb448603598868336</string>
+    <string name="logo">logo</string>
+
 
     <string name="sendbutton">Send</string>
 
