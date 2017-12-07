@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/row_layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
-
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <TextView
             android:id="@+id/sender"
             android:text="Remote Device UUID"
             android:textSize="17sp"
             android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
             android:layout_marginTop="9dp"
             android:layout_marginBottom="5dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/message"
         android:text="This is a sample message"
         android:textSize="18sp"
         android:textColor="#ffffff"
-        android:padding="9dp"
+        android:paddingTop="9dp"
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:paddingBottom="9dp"
         android:layout_marginLeft="9dp"
         android:layout_marginRight="9dp"
         android:layout_width="wrap_content"
@@ -35,18 +38,16 @@
         android:maxWidth="300dp"
         android:background="@drawable/messagebubble"/>
 
-    <LinearLayout
-        android:id="@+id/msg_info_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/upvotes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
             android:text="0 upvotes"
             android:textSize="14sp" />
 
@@ -56,10 +57,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginStart="25dp"
+            android:layout_toRightOf="@+id/upvotes"
             android:text="20160601T110000.000Z"
             android:textSize="14sp" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
