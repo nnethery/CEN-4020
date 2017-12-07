@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,6 +100,8 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
 
             convertView = inflater.inflate(R.layout.list_row_pubsub, parent, false);
 
+            msgView.row_layout = (LinearLayout) convertView.findViewById(R.id.row_layout);
+            msgView.msg_info_layout = (LinearLayout) convertView.findViewById(R.id.msg_info_layout);
             msgView.sender = (TextView) convertView.findViewById(R.id.sender);
             msgView.message = (TextView) convertView.findViewById(R.id.message);
             msgView.timestamp = (TextView) convertView.findViewById(R.id.timestamp);
@@ -322,6 +326,12 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
         else
         {
             msgView.upvotes.setText(dsMsg.getUpvotes() + " upvotes");
+        }
+
+        if(msgView.sender.equals(username))
+        {
+            msgView.row_layout.setGravity(Gravity.END);
+            msgView.msg_info_layout.setGravity(Gravity.END);
         }
 
 

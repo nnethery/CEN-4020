@@ -69,10 +69,7 @@
                 android:layout_toLeftOf="@+id/sendButton"
                 android:gravity="top"
                 android:hint="Type message here..."
-                android:paddingBottom="9dp"
-                android:paddingLeft="9dp"
-                android:paddingRight="9dp"
-                android:paddingTop="9dp"
+                android:padding="9dp"
                 android:textSize="17sp">
 
                 <requestFocus />
