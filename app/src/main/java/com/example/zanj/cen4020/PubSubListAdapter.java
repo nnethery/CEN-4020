@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,6 +91,18 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
     }
 
     @Override
+    public int getItemViewType(int position)
+    {
+        return this.values.get(position).getSender().equals(username) ? 0:1;
+    }
+
+    @Override
+    public int getViewTypeCount()
+    {
+        return 2;
+    }
+
+    @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final PubSubPojo dsMsg = this.values.get(position);
         PubSubListRowUi msgView;
@@ -96,13 +110,36 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
         if (convertView == null) {
             msgView = new PubSubListRowUi(); //row template
 
-            convertView = inflater.inflate(R.layout.list_row_pubsub, parent, false);
+           // convertView = inflater.inflate(R.layout.list_row_pubsub, parent, false);
 
-            msgView.sender = (TextView) convertView.findViewById(R.id.sender);
-            msgView.message = (TextView) convertView.findViewById(R.id.message);
-            msgView.timestamp = (TextView) convertView.findViewById(R.id.timestamp);
-            msgView.upvotes = (TextView) convertView.findViewById(R.id.upvotes);
-            convertView.setTag(msgView);
+            if (getItemViewType(position) == 1) {
+                convertView = inflater.inflate(R.layout.list_row_pubsub, parent, false);
+
+                msgView.row_layout = (LinearLayout) convertView.findViewById(R.id.row_layout);
+                msgView.msg_info_layout = (LinearLayout) convertView.findViewById(R.id.msg_info_layout);
+                msgView.sender = (TextView) convertView.findViewById(R.id.sender);
+                msgView.message = (TextView) convertView.findViewById(R.id.message);
+                msgView.timestamp = (TextView) convertView.findViewById(R.id.timestamp);
+                msgView.upvotes = (TextView) convertView.findViewById(R.id.upvotes);
+                convertView.setTag(msgView);
+            }
+            else
+            {
+                convertView = inflater.inflate(R.layout.list_row_pubsub, parent, false);
+
+                msgView.row_layout = (LinearLayout) convertView.findViewById(R.id.row_layout);
+                msgView.msg_info_layout = (LinearLayout) convertView.findViewById(R.id.msg_info_layout);
+                msgView.sender = (TextView) convertView.findViewById(R.id.sender);
+                msgView.message = (TextView) convertView.findViewById(R.id.message);
+                msgView.timestamp = (TextView) convertView.findViewById(R.id.timestamp);
+                msgView.upvotes = (TextView) convertView.findViewById(R.id.upvotes);
+                convertView.setTag(msgView);
+
+                msgView.message.setBackgroundResource(R.drawable.messagebubble2);
+                msgView.row_layout.setGravity(Gravity.END);
+                msgView.msg_info_layout.setGravity(Gravity.END);
+                msgView.message.setGravity(Gravity.END);
+            }
 
         } else {
             msgView = (PubSubListRowUi) convertView.getTag();
@@ -323,6 +360,15 @@ public class PubSubListAdapter extends ArrayAdapter<PubSubPojo> {
         {
             msgView.upvotes.setText(dsMsg.getUpvotes() + " upvotes");
         }
+
+   /*     if(dsMsg.getSender().equals(username))
+        {
+            msgView.message.setBackgroundResource(R.drawable.messagebubble2);
+            msgView.row_layout.setGravity(Gravity.END);
+            msgView.msg_info_layout.setGravity(Gravity.END);
+            msgView.message.setGravity(Gravity.END);
+
+        }*/
 
 
         return convertView;
